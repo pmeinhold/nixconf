@@ -18,18 +18,23 @@ in
     text = #bash
     ''
       hyprctl binds -j |
-        jq -r '
-          map({mod:.modmask|tostring,key:.key,code:.keycode|tostring,desc:.description,dp:.dispatcher,arg:.arg,sub:.submap}) |
-          map(.mod |= {"0":"","1":"SHIFT+","4":"CTRL+","5":"SHIFT+CTRL+","64":"SUPER+","65":"SUPER+SHIFT+","68":"SUPER+CTRL+","8":"ALT+"} [.]) |
-          map(.code |= {"59":"Comma","60":"Dot"} [.]) |
-          sort_by(.mod) | .[] |
-          select(.sub == "") |
-          select(.desc != "") |
-          "<b>\(.mod)\(if .key == "" then .code else .key end)</b> <i>\(.desc)</i> <span>\(.dp) \(.arg)</span>" ' |
-        rofi -dmenu -markup-rows -i -p 'Hypr binds' -columns 2 |
-        sed -n 's/.*<span>\(.*\)<\/span>.*/\1/p' |
-        sed -e 's/^/"/g' -e 's/$/"/g' |
-        xargs -n1 hyprctl dispatch
+        eval "$(
+          jq -r '
+            map({mod:.modmask|tostring,key:.key,code:.keycode|tostring,desc:.description,dp:.dispatcher,arg:.arg,sub:.submap}) |
+            map(.mod |= {"0":"","1":"SHIFT+","4":"CTRL+","5":"SHIFT+CTRL+","64":"SUPER+","65":"SUPER+SHIFT+","68":"SUPER+CTRL+","8":"ALT+"} [.]) |
+            map(.code |= {"59":"Comma","60":"Dot"} [.]) |
+            sort_by(.mod) | .[] |
+            select(.sub == "") |
+            select(.desc != "") |
+            [ "printf", "<span foreground=\"#cba6f7\"><b>%-24s</b></span> <span foreground=\"#89dceb\"><i>%-28s</i></span>\\n", (.mod + .key), .desc ] | @sh'
+        )" |
+        rofi -dmenu -markup-rows -i
+        # |
+        # sed -n 's/.*<span>\(.*\)<\/span>.*/\1/p' |
+        # sed -e 's/^/"/g' -e 's/$/"/g' |
+        # xargs -n1 hyprctl dispatch
+        # "<b>\(.mod)\(if .key == "" then .code else .key end)</b> <i>\(.desc)</i> <span>\(.dp) \(.arg)</span>" ' |
+        # [ "printf", "<span foreground=\"#cba6f7\"><b>%-24s</b></span> <span foreground=\"#89dceb\"><i>%-28s</i></span> <span foreground=\"#6c7086\"><i>\(.dp + " " + .arg)</i></span>\\n", (.mod + .key), .desc] | @sh'
     '';
   };
 

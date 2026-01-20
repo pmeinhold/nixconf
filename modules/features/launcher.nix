@@ -78,7 +78,7 @@
                     text-color:         inherit;
                     background-color:   inherit;
                     text-transform:     italic;
-                    placeholder:        "<i>Run a program!</i>";
+                    placeholder:        "<i>Type to filter...</i>";
                     placeholder-markup: true;
                     placeholder-color:  @overlay0;
                 }
