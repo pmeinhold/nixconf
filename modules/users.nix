@@ -77,9 +77,9 @@
       config.flake.modules.homeManager.feature-desktop
 
       ({ pkgs, ... }: {
+        home.stateVersion = "25.11";
         home.username = "pmeinhold";
         home.homeDirectory = "/home/optimi/pmeinhold";
-        home.stateVersion = "25.11";
         home.packages = with pkgs; [ nix ];
       })
 
@@ -90,13 +90,16 @@
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
       config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-desktop
 
-      ({ ... }: {
+      ({ pkgs, ... }: {
         home.stateVersion = "25.11";
-        home.username = "rie";
-        home.homeDirectory = "/home/rie";
+        home = {
+          username = "rie";
+          homeDirectory = "/home/rie";
+          packages = with pkgs; [ vim ];
+        };
+        programs.neovim.enable = false;
         wayland.windowManager.hyprland.settings.input.kb_layout = "de";
       })
 

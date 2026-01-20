@@ -1,15 +1,13 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
     ripgrep
   ];
   programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+    enable = lib.mkDefault true;
+    defaultEditor = lib.mkDefault true;
+    vimAlias = lib.mkDefault true;
 
     extraLuaConfig = #lua
     ''

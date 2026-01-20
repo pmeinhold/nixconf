@@ -129,20 +129,6 @@ in
     gtk.enable = true;
     qt.enable = true;
 
-    programs.tofi = {
-      enable = true;
-      settings = {
-        font = "Inconsolata Nerd Font";
-        font-size = 14;
-        outline-width = 0;
-        width = "50%";
-        height = "50%";
-        border-width = config.wayland.windowManager.hyprland.settings.general.border_size;
-        corner-radius = config.wayland.windowManager.hyprland.settings.decoration.rounding;
-        border-color= "#94e2d5";
-      };
-    };
-
     home.packages = with pkgs; [
       pwvucontrol
       networkmanagerapplet
@@ -175,5 +161,19 @@ in
         };
       };
     };
+
+    # programs.tofi = {
+    #   enable = true;
+    #   settings = {
+    #     font = "Inconsolata Nerd Font";
+    #     font-size = 14;
+    #     outline-width = 0;
+    #     width = "50%";
+    #     height = "50%";
+    #     border-width = config.wayland.windowManager.hyprland.settings.general.border_size;
+    #     corner-radius = config.wayland.windowManager.hyprland.settings.decoration.rounding;
+    #     border-color= "#94e2d5";
+    #   };
+    # };
   };
 }

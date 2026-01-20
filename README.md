@@ -1,6 +1,4 @@
-<!-- //<h2 align="left">My <a href="https://nixos.org">NixOS</a> & <a href="https://github.com/nix-community/home-manager">Home Manager</a> Configurations</h1> -->
-
-### ❄️ My [NixOS](https://nixos.org) & [Home-Manager](https://github.com/nix-community/home-manager) Configurations ❄️
+### ❄️ My [NixOS](https://nixos.org) & [Home Manager](https://github.com/nix-community/home-manager) Configurations ❄️
 
 Now using (my interpretation) of the
 [_Dendritic pattern_](https://dendrix.oeiuwq.com/Dendritic.html)
