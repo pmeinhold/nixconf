@@ -74,13 +74,16 @@
     modules = [
       config.flake.modules.homeManager.feature-base
       config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
+      config.flake.modules.homeManager.feature-browser
+      config.flake.modules.homeManager.feature-terminal
 
       ({ pkgs, ... }: {
-        home.stateVersion = "25.11";
-        home.username = "pmeinhold";
-        home.homeDirectory = "/home/optimi/pmeinhold";
-        home.packages = with pkgs; [ nix ];
+        home = {
+          stateVersion = "25.11";
+          username = "pmeinhold";
+          homeDirectory = "/home/optimi/pmeinhold";
+          packages = with pkgs; [ nix ];
+        };
       })
 
     ];
@@ -93,8 +96,8 @@
       config.flake.modules.homeManager.feature-desktop
 
       ({ pkgs, ... }: {
-        home.stateVersion = "25.11";
         home = {
+          stateVersion = "25.11";
           username = "rie";
           homeDirectory = "/home/rie";
           packages = with pkgs; [ vim ];
