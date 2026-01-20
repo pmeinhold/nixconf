@@ -65,6 +65,10 @@
 
   # ./nixp.sh nix-shell -p home-manager nix --run 'home-manager switch --flake .#pmeinhold'
   # foot launch command: /scratch/opt/pmeinhold/dev/nixconf/nixp.sh nix-shell -p fish --command "fish -C 'set -gx PATH ~/.nix-profile/bin $PATH && foot fish'"
+  # Put these into .bashrc:
+  # export NP_LOCATION=/srv/public/[opt-008545/]pmeinhold
+  # export NP_RUNTIME=bwrap
+  # export XDG_CACHE_HOME="$NP_LOCATION"/.cache
   flake.homeConfigurations."pmeinhold" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
