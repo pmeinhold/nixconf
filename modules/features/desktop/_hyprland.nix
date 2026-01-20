@@ -149,13 +149,15 @@ in
       "$tfl"      = "hyprctl --batch 'dispatch togglefloating ; dispatch resizeactive exact 50% 50% ; dispatch centerwindow 1'";
       "$mod"      = "SUPER";
       "$browser"  = "firefox";
+      "$logout"   = "loginctl terminate-user $(whoami)";
+      # "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
+      "$menu"     = "rofi -show drun";
+      "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/screen/$(date +'%s_grim.png')"; # Screenshot utility
       "$term"     =
         if config.programs.foot.enable then "foot"
         else if config.programs.alacritty.enable then "alacritty"
         else if config.programs.wezterm.enable  then "wezterm"
         else "notify-send 'none of foot, alacritty, or wezterm installed'";
-      "$menu"     = "rofi -show drun";
-      "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/screen/$(date +'%s_grim.png')"; # Screenshot utility
 
       # Binds with description
       bindd = [
@@ -167,7 +169,7 @@ in
         ",              Print,  Take screenshot,          exec, $scrnshot"
         "$mod,          Escape, Lock screen,              exec, hyprlock"
         "$mod CONTROL,  Escape, Shutdown,                 exec, systemctl poweroff"
-        "$mod SHIFT,    Escape, Logout,                   exit"
+        "$mod SHIFT,    Escape, Logout,                   exec, $logout"
         "$mod SHIFT,    Q,      Close window,             killactive"
         "$mod,          F,      Maximize,                 fullscreen, 1"
         "$mod SHIFT,    F,      Fullscreen,               fullscreen, 0"
@@ -184,10 +186,10 @@ in
         "$mod,          l,      Go workspace right,       workspace, +1"
         "$mod SHIFT,    h,      Move to workspace left,   movetoworkspacesilent, -1"
         "$mod SHIFT,    l,      Move to workspace right,  movetoworkspacesilent, +1"
-        "$mod,          1,      Go to workspace 1,        workspace,       1"
-        "$mod,          2,      Go to workspace 2,        workspace,       2"
-        "$mod,          3,      Go to workspace 3,        workspace,       3"
-        "$mod,          4,      Go to workspace 4,        workspace,       4"
+        "$mod,          1,      Go to workspace 1,        workspace, 1"
+        "$mod,          2,      Go to workspace 2,        workspace, 2"
+        "$mod,          3,      Go to workspace 3,        workspace, 3"
+        "$mod,          4,      Go to workspace 4,        workspace, 4"
         "$mod SHIFT,    1,      Move to workspace 1,      movetoworkspacesilent, 1"
         "$mod SHIFT,    2,      Move to workspace 2,      movetoworkspacesilent, 2"
         "$mod SHIFT,    3,      Move to workspace 3,      movetoworkspacesilent, 3"
