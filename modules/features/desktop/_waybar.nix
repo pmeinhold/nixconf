@@ -67,7 +67,8 @@ in
       };
       "custom/quit" = {
         format = "󰿅 ";# 󰿅  󰅙
-        on-click = "${pkgs.hyprland}/bin/hyprctl dispatch exit";
+        # on-click = "${pkgs.hyprland}/bin/hyprctl dispatch exit";
+        on-click = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
         tooltip = false;
       };
       "hyprland/workspaces" = {

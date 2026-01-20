@@ -149,8 +149,7 @@ in
       "$tfl"      = "hyprctl --batch 'dispatch togglefloating ; dispatch resizeactive exact 50% 50% ; dispatch centerwindow 1'";
       "$mod"      = "SUPER";
       "$browser"  = "firefox";
-      "$logout"   = "loginctl terminate-user $(whoami)";
-      # "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
+      "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
       "$menu"     = "rofi -show drun";
       "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/screen/$(date +'%s_grim.png')"; # Screenshot utility
       "$term"     =
