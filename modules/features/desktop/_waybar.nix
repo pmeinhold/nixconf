@@ -46,7 +46,7 @@ in
         ];
       };
       "custom/launcher" = {
-        on-click = "";
+        on-click = config.home.file."showbinds".target;
         format = " ";
         tooltip = false;
       };

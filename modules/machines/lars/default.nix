@@ -7,6 +7,7 @@
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-podman
+      config.flake.modules.nixos.feature-libvirt
 
       ({ ... }: {
         networking.hostName = "lars";
@@ -20,6 +21,8 @@
             PasswordAuthentication = true;
           };
         };
+
+        users.users.paulm.extraGroups = [ "libvirtd" ];
 
         programs.steam = {
           enable = true;

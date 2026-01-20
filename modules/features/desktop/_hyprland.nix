@@ -9,6 +9,30 @@ let
   fullWindowColor = "rgb(a6e3a1)";
 in
 {
+  # Show keybinds script
+  # https://github.com/hyprland-community/hypr-binds?tab=readme-ov-file
+  home.packages = with pkgs; [ jq ]; # for hypr-binds-script
+  home.file."showbinds" = {
+    executable = true;
+    target = ".config/showbinds.sh";
+    text = #bash
+    ''
+      hyprctl binds -j |
+        jq -r '
+          map({mod:.modmask|tostring,key:.key,code:.keycode|tostring,desc:.description,dp:.dispatcher,arg:.arg,sub:.submap}) |
+          map(.mod |= {"0":"","1":"SHIFT+","4":"CTRL+","5":"SHIFT+CTRL+","64":"SUPER+","65":"SUPER+SHIFT+","68":"SUPER+CTRL+","8":"ALT+"} [.]) |
+          map(.code |= {"59":"Comma","60":"Dot"} [.]) |
+          sort_by(.mod) | .[] |
+          select(.sub == "") |
+          select(.desc != "") |
+          "<b>\(.mod)\(if .key == "" then .code else .key end)</b> <i>\(.desc)</i> <span>\(.dp) \(.arg)</span>" ' |
+        rofi -dmenu -markup-rows -i -p 'Hypr binds' -columns 2 |
+        sed -n 's/.*<span>\(.*\)<\/span>.*/\1/p' |
+        sed -e 's/^/"/g' -e 's/$/"/g' |
+        xargs -n1 hyprctl dispatch
+    '';
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -125,80 +149,55 @@ in
         else if config.programs.alacritty.enable then "alacritty"
         else if config.programs.wezterm.enable  then "wezterm"
         else "notify-send 'none of foot, alacritty, or wezterm installed'";
-      # "$termfiles"= "$term -e fish -c y";
-      # "$files"    = "pcmanfm";
-      # "$menu0"     = "tofi-drun | xargs hyprctl dispatch exec";
-      # "$menu1"     = "tofi-run | xargs hyprctl dispatch exec";
       "$menu"     = "rofi -show drun";
       "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/screen/$(date +'%s_grim.png')"; # Screenshot utility
 
-      # Non-hold-repeatable binds
+      # Binds with description
+      bindd = [
+        "$mod,          space,  Show keybinds,            exec, ${config.home.file."showbinds".target}"
+        "$mod,          Return, Open terminal,            exec, $term"
+        "$mod SHIFT,    Return, Open launcher,            exec, $menu"
+        "$mod,          B,      Open browser,             exec, $browser"
+        "$mod,          P,      Take screenshot,          exec, $scrnshot"
+        ",              Print,  Take screenshot,          exec, $scrnshot"
+        "$mod,          Escape, Lock screen,              exec, hyprlock"
+        "$mod CONTROL,  Escape, Shutdown,                 exec, systemctl poweroff"
+        "$mod SHIFT,    Escape, Logout,                   exit"
+        "$mod SHIFT,    Q,      Close window,             killactive"
+        "$mod,          F,      Maximize,                 fullscreen, 1"
+        "$mod SHIFT,    F,      Fullscreen,               fullscreen, 0"
+        "$mod CONTROL,  F,      Toggle floating,          exec, $tfl"
+        "$mod,          j,      Focus window down,        layoutmsg, cyclenext"
+        "$mod,          k,      Focus window up,          layoutmsg, cycleprev"
+        "$mod SHIFT,    j,      Move window down,         layoutmsg, swapnext"
+        "$mod SHIFT,    k,      Move window up,           layoutmsg, swapprev"
+        "$mod CONTROL,  h,      Resize window left,       resizeactive, -80   0"
+        "$mod CONTROL,  j,      Resize window down,       resizeactive,   0  80"
+        "$mod CONTROL,  k,      Resize window up,         resizeactive,   0 -80"
+        "$mod CONTROL,  l,      Resize window right,      resizeactive,  80   0"
+        "$mod,          h,      Go workspace left,        workspace, -1"
+        "$mod,          l,      Go workspace right,       workspace, +1"
+        "$mod SHIFT,    h,      Move to workspace left,   movetoworkspacesilent, -1"
+        "$mod SHIFT,    l,      Move to workspace right,  movetoworkspacesilent, +1"
+        "$mod,          1,      Go to workspace 1,        workspace,       1"
+        "$mod,          2,      Go to workspace 2,        workspace,       2"
+        "$mod,          3,      Go to workspace 3,        workspace,       3"
+        "$mod,          4,      Go to workspace 4,        workspace,       4"
+        "$mod SHIFT,    1,      Move to workspace 1,      movetoworkspacesilent, 1"
+        "$mod SHIFT,    2,      Move to workspace 2,      movetoworkspacesilent, 2"
+        "$mod SHIFT,    3,      Move to workspace 3,      movetoworkspacesilent, 3"
+        "$mod SHIFT,    4,      Move to workspace 4,      movetoworkspacesilent, 4"
+      ];
       bind = [
-        # Launch
-        "$mod,          Return, exec,   $term"
-        "$mod SHIFT,    Return, exec,   $menu"
-        # "$mod CONTROL,  Return, exec,   $menu1"
-        # "$mod CONTROL,  Return, exec,   $termfiles"
-        # "$mod,          E,      exec,   $files"
-        "$mod,          B,      exec,   $browser"
-        "$mod,          P,      exec,   $scrnshot"
-        ",              Print,  exec,   $scrnshot"
-        # Power & Exit
-        "$mod,          Escape, exec,   hyprlock"
-        "$mod CONTROL,  Escape, exec,   systemctl poweroff"
-        "$mod SHIFT,    Escape, exit"
-        # Windows
-        "$mod SHIFT,    Q,      killactive"
-        "$mod,          F,      fullscreen, 1" # maximize
-        "$mod SHIFT,    F,      fullscreen, 0" # whole screen
-        "$mod CONTROL,  F,      exec, $tfl"
-        # Windows: cycle, swap
-        "$mod,          j, layoutmsg, cyclenext"
-        "$mod,          k, layoutmsg, cycleprev"
-        "$mod SHIFT,    j, layoutmsg, swapnext"
-        "$mod SHIFT,    k, layoutmsg, swapprev"
-        # Windows: resize
-        "$mod CONTROL, h, resizeactive, -80   0"
-        "$mod CONTROL, j, resizeactive,   0  80"
-        "$mod CONTROL, k, resizeactive,   0 -80"
-        "$mod CONTROL, l, resizeactive,  80   0"
-        # Brightness
         ",     XF86MonBrightnessUp,     exec, brightnessctl set +5%"
         ",     XF86MonBrightnessDown,   exec, brightnessctl set 5%-"
         "$mod, XF86AudioRaiseVolume,    exec, brightnessctl set +5%"
         "$mod, XF86AudioLowerVolume,    exec, brightnessctl set 5-%"
-        # Audio
-        ", XF86AudioRaiseVolume,    exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume,    exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioPlay,           exec, playerctl play-pause"
-        ", XF86AudioPrev,           exec, playerctl previous"
-        ", XF86AudioNext,           exec, playerctl next"
-        # Workspaces
-        "$mod,          h, workspace,      -1"          # relative
-        "$mod,          l, workspace,      +1"          # relative
-        "$mod SHIFT,    h, movetoworkspacesilent, -1"   # relative
-        "$mod SHIFT,    l, movetoworkspacesilent, +1"   # relative
-        "$mod,          1, workspace,       1"
-        "$mod,          2, workspace,       2"
-        "$mod,          3, workspace,       3"
-        "$mod,          4, workspace,       4"
-        "$mod,          5, workspace,       5"
-        "$mod,          6, workspace,       6"
-        "$mod,          7, workspace,       7"
-        "$mod,          8, workspace,       8"
-        "$mod,          9, workspace,       9"
-        "$mod SHIFT,    1, movetoworkspacesilent, 1"
-        "$mod SHIFT,    2, movetoworkspacesilent, 2"
-        "$mod SHIFT,    3, movetoworkspacesilent, 3"
-        "$mod SHIFT,    4, movetoworkspacesilent, 4"
-        "$mod SHIFT,    5, movetoworkspacesilent, 5"
-        "$mod SHIFT,    6, movetoworkspacesilent, 6"
-        "$mod SHIFT,    7, movetoworkspacesilent, 7"
-        "$mod SHIFT,    8, movetoworkspacesilent, 8"
-        "$mod SHIFT,    9, movetoworkspacesilent, 9"
-        # Example special workspace (scratchpad)
-        # "$mod,          S, togglespecialworkspace, magic"
-        # "$mod SHIFT,    S, movetoworkspace, special:magic"
+        ", XF86AudioRaiseVolume,        exec, wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume,        exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioPlay,               exec, playerctl play-pause"
+        ", XF86AudioPrev,               exec, playerctl previous"
+        ", XF86AudioNext,               exec, playerctl next"
       ];
 
       # Hold-repeatable binds
