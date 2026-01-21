@@ -100,7 +100,10 @@
           stateVersion = "25.11";
           username = "rie";
           homeDirectory = "/home/rie";
-          packages = with pkgs; [ vim ];
+          packages = with pkgs; [
+            vim
+            python3
+          ];
         };
         programs.neovim.enable = false;
         wayland.windowManager.hyprland.settings.input.kb_layout = "de";
