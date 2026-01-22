@@ -25,7 +25,6 @@
         users.users.rie = {
           isNormalUser = true;
           home = "/home/rie";
-          shell = pkgs.fish;
           extraGroups = [
             "wheel"
             "networkmanager"
