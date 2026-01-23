@@ -82,7 +82,7 @@ in
     };
   };
 
-  flake.modules.homeManager.feature-base = { lib, ... }:
+  flake.modules.homeManager.feature-base = { lib, pkgs, ... }:
   {
     imports = [
       config.flake.modules.homeManager.feature-theme
@@ -94,5 +94,13 @@ in
     home.homeDirectory = lib.mkDefault "/home/${defaultUser}";
 
     programs.home-manager.enable = true;
+
+    fonts.fontconfig.enable = true;
+    home.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      inconsolata
+      nerd-fonts.inconsolata
+    ];
   };
 }

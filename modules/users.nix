@@ -69,6 +69,7 @@
   # export NP_LOCATION=/srv/public/[opt-008545/]pmeinhold
   # export NP_RUNTIME=bwrap
   # export XDG_CACHE_HOME="$NP_LOCATION"/.cache
+  # export PATH=~/.nix-profile/bin:$PATH # for bash
   flake.homeConfigurations."pmeinhold" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
