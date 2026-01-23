@@ -63,20 +63,40 @@
     ];
   };
 
-  # ./nixp.sh nix-shell -p home-manager nix --run 'home-manager switch --flake .#pmeinhold'
-  # foot launch command: /scratch/opt/pmeinhold/dev/nixconf/nixp.sh nix-shell -p fish --command "fish -C 'set -gx PATH ~/.nix-profile/bin $PATH && foot fish'"
   # Put these into .bashrc:
-  # export NP_LOCATION=/srv/public/[opt-008545/]pmeinhold
-  # export NP_RUNTIME=bwrap
-  # export XDG_CACHE_HOME="$NP_LOCATION"/.cache
-  # export PATH=~/.nix-profile/bin:$PATH # for bash
-  flake.homeConfigurations."pmeinhold" = inputs.home-manager.lib.homeManagerConfiguration {
+  # --- Enable fish/nix environment/profile ---
+  # export STORE="/srv/public/pmeinhold"
+  # export MYHOME="/scratch/opt/pmeinhold"
+  # export PATH=~/.nix-profile/bin:$MYHOME:$PATH
+  # cd $MYHOME
+  # if [[ $- == *i* ]] && command -v fish >/dev/null 2>&1; then
+  #     exec fish
+  # fi
+  flake.homeConfigurations."pmeinhold@opt" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
       config.flake.modules.homeManager.feature-base
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
+
+      ({ pkgs, ... }: {
+        home = {
+          stateVersion = "25.11";
+          username = "pmeinhold";
+          homeDirectory = "/home/optimi/pmeinhold";
+          packages = with pkgs; [ nix ];
+        };
+      })
+
+    ];
+  };
+
+  flake.homeConfigurations."pmeinhold@z1" = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      config.flake.modules.homeManager.feature-base
+      config.flake.modules.homeManager.feature-shell
 
       ({ pkgs, ... }: {
         home = {
