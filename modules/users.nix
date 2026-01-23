@@ -102,7 +102,7 @@
         home = {
           stateVersion = "25.11";
           username = "pmeinhold";
-          homeDirectory = "/home/optimi/pmeinhold";
+          homeDirectory = "/home/htc/pmeinhold";
           packages = with pkgs; [ nix ];
         };
       })
