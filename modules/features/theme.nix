@@ -22,10 +22,7 @@ in
     catppuccin = lib.optionalAttrs hasCatppuccin {
       enable = true;
       inherit flavor accent;
-      cursors = {
-        enable = true;
-        accent = "light";
-      };
+      cursors.accent = "light";
     };
 
     # Catppuccin GTK theme is archived, so I must explicitly configure it.

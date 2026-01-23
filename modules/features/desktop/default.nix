@@ -1,6 +1,7 @@
-{ config, ... }:
+{ config, inputs, ... }:
 let
   flakeConfig = config;
+  hasCatppuccin = inputs ? catppuccin;
 in
 {
   flake.modules.nixos.feature-desktop = { lib, pkgs, ... }: {
@@ -110,7 +111,7 @@ in
     };
   };
 
-  flake.modules.homeManager.feature-desktop = { config, pkgs, ... }: {
+  flake.modules.homeManager.feature-desktop = { config, lib, pkgs, ... }: {
     imports = [
       ./_hyprland.nix
       ./_hyprlock.nix
@@ -118,16 +119,19 @@ in
       flakeConfig.flake.modules.homeManager.feature-browser
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-launcher
-    ];
+    ] ++ lib.optional hasCatppuccin inputs.catppuccin.homeModules.catppuccin
+    ;
+
+    # Use catppuccin cursors if available
+    catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
+    home.pointerCursor.gtk.enable = true;
+    gtk.enable = true;
+    qt.enable = true;
 
     services = {
       dunst.enable = true;
       udiskie.enable = true;
     };
-
-    home.pointerCursor.gtk.enable = true;
-    gtk.enable = true;
-    qt.enable = true;
 
     home.packages = with pkgs; [
       pwvucontrol
