@@ -25,6 +25,7 @@
         users.users.rie = {
           isNormalUser = true;
           home = "/home/rie";
+          shell = pkgs.bashInteractive;
           extraGroups = [
             "wheel"
             "networkmanager"
