@@ -119,8 +119,7 @@ in
       flakeConfig.flake.modules.homeManager.feature-browser
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-launcher
-    ] ++ lib.optional hasCatppuccin inputs.catppuccin.homeModules.catppuccin
-    ;
+    ];
 
     # Use catppuccin cursors if available
     catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
