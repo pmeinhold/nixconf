@@ -26,15 +26,11 @@ in
             sort_by(.mod) | .[] |
             select(.sub == "") |
             select(.desc != "") |
-            [ "printf", "<span foreground=\"#cba6f7\"><b>%-24s</b></span> <span foreground=\"#89dceb\"><i>%-28s</i></span>\\n", (.mod + .key), .desc ] | @sh'
+            [ "printf", "<span color=\"#cba6f7\"><b>%-24s</b></span> <span color=\"#89dceb\"><i>%-28s</i></span> <span color=\"#6c7086\"><i>%s</i></span>\\n", (.mod + .key), .desc, (.dp + " " + .arg)] | @sh'
         )" |
-        rofi -dmenu -markup-rows -i
-        # |
-        # sed -n 's/.*<span>\(.*\)<\/span>.*/\1/p' |
-        # sed -e 's/^/"/g' -e 's/$/"/g' |
-        # xargs -n1 hyprctl dispatch
-        # "<b>\(.mod)\(if .key == "" then .code else .key end)</b> <i>\(.desc)</i> <span>\(.dp) \(.arg)</span>" ' |
-        # [ "printf", "<span foreground=\"#cba6f7\"><b>%-24s</b></span> <span foreground=\"#89dceb\"><i>%-28s</i></span> <span foreground=\"#6c7086\"><i>\(.dp + " " + .arg)</i></span>\\n", (.mod + .key), .desc] | @sh'
+        rofi -dmenu -markup-rows -i |
+        sed 's/.*<i>\([^<]*\)<\/i>.*/\1/' |
+        xargs -I {} hyprctl dispatch {}
     '';
   };
 
@@ -60,7 +56,7 @@ in
           bar_color = ${barColor}
           col.text = ${textColor}
           bar_part_of_window = true
-          on_double_click = hyprctl dispatch togglefloating
+          on_double_click = $tfl
           icon_on_hover = true
           # BUG: gives border/focus flickering if enabled:
           bar_precedence_over_border = false
