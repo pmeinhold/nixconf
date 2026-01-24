@@ -147,7 +147,7 @@ in
       "$browser"  = "firefox";
       "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
       "$menu"     = "rofi -show drun";
-      "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/screen/$(date +'%s_grim.png')"; # Screenshot utility
+      "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/$(date +'%s_grim.png')"; # Screenshot utility
       "$term"     =
         if config.programs.foot.enable then "foot"
         else if config.programs.alacritty.enable then "alacritty"
