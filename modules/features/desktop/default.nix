@@ -140,11 +140,9 @@ in
       zathura
       spotify
       telegram-desktop
-      # vlc
-      # gimp
+      signal-desktop
       # libreoffice-still
       # hyphenDicts.de_DE
-      # dolphin-emu
       # cbatticon
       # bitwarden-desktop
     ];
