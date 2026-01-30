@@ -87,6 +87,7 @@
           homeDirectory = "/home/optimi/pmeinhold";
           packages = with pkgs; [ nix ];
         };
+        targets.genericLinux.enable = true;
       })
 
     ];
@@ -105,6 +106,7 @@
           homeDirectory = "/home/htc/pmeinhold";
           packages = with pkgs; [ nix ];
         };
+        targets.genericLinux.enable = true;
       })
 
     ];
