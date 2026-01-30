@@ -1,9 +1,9 @@
 { ... }:
 {
-  flake.modules.homeManager.feature-terminal = { pkgs, ... }:
+  flake.modules.homeManager.feature-terminal = { lib, pkgs, ... }:
   {
     programs.foot = {
-      enable = true;
+      enable = lib.mkDefault true;
       server.enable = true;
       settings = {
         main = {

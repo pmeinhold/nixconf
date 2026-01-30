@@ -80,7 +80,7 @@
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
 
-      ({ pkgs, ... }: {
+      ({ lib, pkgs, ... }: {
         home = {
           stateVersion = "25.11";
           username = "pmeinhold";
@@ -88,6 +88,7 @@
           packages = with pkgs; [ nix ];
         };
         targets.genericLinux.enable = true;
+        programs.foot.server.enable = lib.mkForce false;
       })
 
     ];

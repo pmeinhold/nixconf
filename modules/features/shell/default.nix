@@ -50,14 +50,15 @@
       enable = true;
       settings = {
         add_newline = false;
-        format = "$username@$hostname $directory $nix_shell$character";
+        format = "$username$hostname $directory $nix_shell$character";
         right_format = "$git_branch";
         username = {
           show_always = true;
           format = "[$user](teal)";
         };
         hostname = {
-          ssh_only = false;
+          ssh_symbol = " ";
+          ssh_only = true;
           format = "[$ssh_symbol$hostname](blue)";
         };
         directory = {
