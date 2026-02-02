@@ -77,6 +77,7 @@
 
     plugins = with pkgs.vimPlugins; [
       colorizer
+      typst-vim
       nvim-autopairs
       vim-surround
       zen-mode-nvim
@@ -87,7 +88,6 @@
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.rasi
       nvim-treesitter-parsers.hyprlang
-      typst-vim
       {
         plugin = noice-nvim;
         type = "lua";

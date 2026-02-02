@@ -63,15 +63,6 @@
     ];
   };
 
-  # Put these into .bashrc:
-  # --- Enable fish/nix environment/profile ---
-  # export STORE="/srv/public/pmeinhold"
-  # export MYHOME="/scratch/opt/pmeinhold"
-  # export PATH=~/.nix-profile/bin:$MYHOME:$PATH
-  # cd $MYHOME
-  # if [[ $- == *i* ]] && command -v fish >/dev/null 2>&1; then
-  #     exec fish
-  # fi
   flake.homeConfigurations."pmeinhold@opt" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [

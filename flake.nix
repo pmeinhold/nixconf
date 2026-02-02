@@ -18,7 +18,8 @@
 
     agenix.url = "github:ryantm/agenix";
 
-    catppuccin.url = "github:catppuccin/nix";#/release-25.05";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
+    catppuccin-unstable.url = "github:catppuccin/nix";
 
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
