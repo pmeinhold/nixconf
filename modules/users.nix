@@ -99,6 +99,10 @@
           packages = with pkgs; [ nix ];
         };
         targets.genericLinux.enable = true;
+        programs.fish.interactiveShellInit = ''
+          # initialize conda manually
+          eval /opt/conda/bin/conda "shell.fish" "hook" $argv | source
+        '';
       })
 
     ];

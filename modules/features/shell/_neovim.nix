@@ -80,7 +80,6 @@
       typst-vim
       nvim-autopairs
       vim-surround
-      zen-mode-nvim
       markdown-preview-nvim
       nvim-treesitter-parsers.nix
       nvim-treesitter-parsers.css
@@ -88,6 +87,18 @@
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.rasi
       nvim-treesitter-parsers.hyprlang
+      {
+        plugin = zen-mode-nvim;
+        type = "lua";
+        config = #lua
+        ''
+          require("zen-mode").toggle({
+            window = {
+              width = .85 -- width will be 85% of the editor width
+            }
+          })
+        '';
+      }
       {
         plugin = noice-nvim;
         type = "lua";
@@ -117,6 +128,7 @@
         type = "lua";
         config = #lua
         ''
+          require("flash").treesitter(opts?)
         '';
       }
       {
