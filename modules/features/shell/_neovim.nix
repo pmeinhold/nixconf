@@ -92,11 +92,6 @@
         type = "lua";
         config = #lua
         ''
-          require("zen-mode").toggle({
-            window = {
-              width = .85 -- width will be 85% of the editor width
-            }
-          })
         '';
       }
       {
@@ -128,7 +123,6 @@
         type = "lua";
         config = #lua
         ''
-          require("flash").treesitter(opts?)
         '';
       }
       {

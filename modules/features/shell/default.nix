@@ -51,21 +51,22 @@
       settings = {
         add_newline = false;
         format = "$username$hostname $directory $nix_shell$character";
-        right_format = "$git_branch";
+        right_format = "$python$conda$git_branch";
         username = {
           show_always = true;
           format = "[$user](teal)";
         };
         hostname = {
-          ssh_symbol = " ";
           ssh_only = true;
-          format = "[$ssh_symbol$hostname](blue)";
+          format = "[ ](text)[$hostname](blue)";
         };
         directory = {
           format = "[$path](yellow)";
           truncate_to_repo = false;
           truncation_symbol = "…/";
         };
+        python.format = "[ $virtualenv ](blue)";
+        conda.format = "[🅒 $environment ](blue)";
         nix_shell.format = "[󱄅 ](blue)";
         git_branch.format = "[ $branch(:$remote_branch)](teal)";
       };
