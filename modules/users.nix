@@ -70,6 +70,7 @@
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
+      config.flake.modules.homeManager.feature-defaultapps
 
       ({ lib, pkgs, ... }: {
         home = {

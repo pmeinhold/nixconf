@@ -119,6 +119,7 @@ in
       flakeConfig.flake.modules.homeManager.feature-browser
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-launcher
+      flakeConfig.flake.modules.homeManager.feature-defaultapps
     ];
 
     # Use catppuccin cursors if available
@@ -147,34 +148,10 @@ in
       # bitwarden-desktop
     ];
 
-    xdg = {
-      portal = {
-        enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-        config.common.default = "*";
-      };
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          "application/pdf" = "org.pwmt.zathura.desktop";
-          "image/jpeg" = "sxiv.desktop";
-          "image/png" = "sxiv.desktop";
-        };
-      };
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common.default = "*";
     };
-
-    # programs.tofi = {
-    #   enable = true;
-    #   settings = {
-    #     font = "Inconsolata Nerd Font";
-    #     font-size = 14;
-    #     outline-width = 0;
-    #     width = "50%";
-    #     height = "50%";
-    #     border-width = config.wayland.windowManager.hyprland.settings.general.border_size;
-    #     corner-radius = config.wayland.windowManager.hyprland.settings.decoration.rounding;
-    #     border-color= "#94e2d5";
-    #   };
-    # };
   };
 }
