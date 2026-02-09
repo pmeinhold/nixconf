@@ -82,12 +82,13 @@
       vim-surround
       markdown-preview-nvim
       nvim-treesitter-parsers.nix
+      nvim-treesitter-parsers.ini
       nvim-treesitter-parsers.css
       nvim-treesitter-parsers.kdl
+      nvim-treesitter-parsers.yaml
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.rasi
       nvim-treesitter-parsers.hyprlang
-      nvim-treesitter-parsers.ini
       {
         plugin = zen-mode-nvim;
         type = "lua";
@@ -137,6 +138,11 @@
               enable = true,
             },
             indent = { enable = true },
+          })
+          vim.filetype.add({
+            filename = {
+              [".papis.config"] = "dosini",
+            },
           })
         '';
       }
