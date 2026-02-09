@@ -87,6 +87,7 @@
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.rasi
       nvim-treesitter-parsers.hyprlang
+      nvim-treesitter-parsers.ini
       {
         plugin = zen-mode-nvim;
         type = "lua";
