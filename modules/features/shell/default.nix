@@ -15,6 +15,8 @@
       tree
       bitwarden-cli
       geteduroam-cli
+      # for yazi:
+      poppler
     ];
 
     # SHELL

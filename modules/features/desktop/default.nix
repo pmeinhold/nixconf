@@ -137,8 +137,6 @@ in
       pwvucontrol
       networkmanagerapplet
       brightnessctl
-      sxiv
-      zathura
       spotify
       telegram-desktop
       signal-desktop
