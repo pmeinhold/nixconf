@@ -138,12 +138,7 @@ in
       networkmanagerapplet
       brightnessctl
       spotify
-      telegram-desktop
       signal-desktop
-      # libreoffice-still
-      # hyphenDicts.de_DE
-      # cbatticon
-      # bitwarden-desktop
     ];
 
     xdg.portal = {

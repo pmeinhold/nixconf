@@ -19,6 +19,7 @@ in
 
         services.desktopManager.gnome.enable = true;
         services.displayManager.gdm.enable = false;
+        services.displayManager.sddm.wayland.enable = true;
         # services.displayManager.autoLogin.user = "paulm";
 
         # Use jovian if available
