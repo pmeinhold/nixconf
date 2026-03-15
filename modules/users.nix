@@ -40,7 +40,10 @@
         programs.retroarch.settings = {
           video_driver = "glcore"; # vulkan, glcore, gl, gl1, sdl
         };
-        home.packages = with pkgs; [ stretchly ];
+        home.packages = with pkgs; [
+          stretchly
+          prismlauncher # minecraft
+        ];
         home.stateVersion = "25.11";
       })
 
