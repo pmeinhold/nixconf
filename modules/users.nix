@@ -43,6 +43,7 @@
         home.packages = with pkgs; [
           stretchly
           prismlauncher # minecraft
+          discord
         ];
         home.stateVersion = "25.11";
       })
