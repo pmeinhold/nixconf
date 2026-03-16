@@ -90,6 +90,32 @@
     ];
   };
 
+  flake.homeConfigurations."pmeinhold@mob" = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      config.flake.modules.homeManager.feature-base
+      config.flake.modules.homeManager.feature-shell
+      config.flake.modules.homeManager.feature-browser
+      config.flake.modules.homeManager.feature-terminal
+      config.flake.modules.homeManager.feature-defaultapps
+
+      ({ lib, pkgs, ... }: {
+        home = {
+          stateVersion = "25.11";
+          username = "pmeinhold";
+          homeDirectory = "/home/pmeinhold";
+          packages = with pkgs; [
+            nix
+            openvpn
+          ];
+        };
+        targets.genericLinux.enable = true;
+        programs.foot.server.enable = lib.mkForce false;
+      })
+
+    ];
+  };
+
   flake.homeConfigurations."pmeinhold@z1" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
