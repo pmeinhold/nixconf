@@ -4,7 +4,7 @@
 #   username = "paulm";
 # in
 {
-  flake.nixosConfigurations.srvr = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.vps0 = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       config.flake.modules.nixos.feature-base
