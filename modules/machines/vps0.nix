@@ -1,8 +1,7 @@
 { lib, config, inputs, ... }:
-# let
-#   domain = "getintogig.duckdns.org";
-#   username = "paulm";
-# in
+let
+  domain = "pmeinhold.duckdns.org";
+in
 {
   flake.nixosConfigurations.vps0 = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
@@ -41,6 +40,12 @@
         };
 
         services = {
+          caddy = {
+            enable = true;
+            virtualHosts.${domain}.extraConfig = ''
+              respond "Hello, world!"
+            '';
+          };
           openssh = {
             enable = true;
             ports = [ 69 ];
