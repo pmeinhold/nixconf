@@ -38,7 +38,7 @@ in
       variables.EDITOR = "nvim";
     };
 
-    boot.loader = {
+    boot.loader = lib.mkDefault {
       timeout = 2;
       systemd-boot = {
         configurationLimit = 4;
