@@ -157,6 +157,13 @@ in
           };
         };
 
+        services.caddy = {
+          enable = true;
+          virtualHosts."immich.getintogig.duckdns.org".extraConfig = ''
+            reverse_proxy http://srvr.tail70fe0.ts.net:2283
+          '';
+        };
+
         virtualisation.oci-containers = {
           backend = "podman";
 
