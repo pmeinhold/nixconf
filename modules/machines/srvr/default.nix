@@ -1,6 +1,8 @@
 { lib, config, inputs, ... }:
 let
   domain = "getintogig.duckdns.org";
+  domain2 = "random123test.duckdns.org";
+  domain3 = "meinhold.duckdns.org";
   tailnetip = "http://srvr.tail70fe0.ts.net";
   username = "paulm";
 in
@@ -113,7 +115,7 @@ in
             settings = {
               MICROBIN_BIND = "0.0.0.0";
               MICROBIN_PORT = 8081;
-              MICROBIN_PUBLIC_PATH = "https://microbin.${domain}";
+              MICROBIN_PUBLIC_PATH = "https://microbin.${domain2}";
               MICROBIN_DISABLE_TELEMETRY = true;
             };
           };
@@ -135,7 +137,7 @@ in
           paperless = {
             enable = true;
             port = 28981;
-            domain = "paperless.${domain}";
+            domain = "paperless.${domain2}";
             address = "0.0.0.0";
             user = "${username}";
             mediaDir = "/mnt/storage/Paperless";
@@ -157,7 +159,6 @@ in
           vaultwarden = { };
         };
 
-        # age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
         age.secrets.duckdns_token = {
           file = ../../../secrets/duckdns_token.age;
           owner = "caddy";
@@ -169,38 +170,29 @@ in
             plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
             hash = "sha256-uMYFZJ+dOoahO9+nAU+bGiuFQRmPbPWFwH1uH8xBcFQ=";
           };
-          virtualHosts."random123test.duckdns.org".extraConfig = ''
+          # virtualHosts."${...}".extraConfig = ''
+          #   tls {
+          #     dns duckdns {env.DUCKDNS_TOKEN}
+          #   }
+          #   reverse_proxy ${tailnetip}:2283
+          # '';
+          virtualHosts."*.${domain2}".extraConfig = ''
             tls {
               dns duckdns {env.DUCKDNS_TOKEN}
             }
-            reverse_proxy ${tailnetip}:2283
+            @immich host immich.${domain2}
+            handle @immich {
+              reverse_proxy ${tailnetip}:2283
+            }
+            @jf host jf.${domain2}
+            handle @jf {
+              reverse_proxy ${tailnetip}:8096
+            }
+            handle {
+              abort
+            }
           '';
         };
-
-        # virtualisation.oci-containers = {
-        #   backend = "podman";
-
-        #   # Nginx-Proxy-Manager for reverse-proxy
-        #   containers.nginx-proxy-manager = {
-        #     image = "jc21/nginx-proxy-manager:latest";
-        #     ports = [ "80:80" "443:443" "81:81" ];
-        #     # autoStart = true;
-        #     volumes = [
-        #       "/var/lib/nginx-proxy-manager/data:/data"
-        #       "/var/lib/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
-        #     ];
-        #     # Optional environment variables
-        #     environment = {
-        #       # "DB_SQLITE_FILE" = "/data/database.sqlite";
-        #       # "DISABLE_IPV6" = "true";
-        #     };
-        #   };
-        # };
-        # systemd.tmpfiles.rules = [
-        #   "d /var/lib/nginx-proxy-manager 0755 root root -"
-        #   "d /var/lib/nginx-proxy-manager/data 0755 root root -"
-        #   "d /var/lib/nginx-proxy-manager/letsencrypt 0755 root root -"
-        # ];
 
         system.stateVersion = "25.11";
       })
