@@ -157,6 +157,7 @@ in
           vaultwarden = { };
         };
 
+        # age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
         age.secrets.duckdns_token = {
           file = ../../../secrets/duckdns_token.age;
           owner = "caddy";
