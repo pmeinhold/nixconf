@@ -6,6 +6,7 @@ in
   flake.modules.nixos.feature-base = { lib, pkgs, ... }:
   {
     imports = [
+      inputs.agenix.nixosModules.default
       config.flake.modules.nixos.feature-theme
     ];
 
@@ -34,6 +35,7 @@ in
       systemPackages = with pkgs; [
         git
         neovim
+        inputs.agenix.packages.${system}.default
       ];
       variables.EDITOR = "nvim";
     };
@@ -85,6 +87,7 @@ in
   flake.modules.homeManager.feature-base = { lib, pkgs, ... }:
   {
     imports = [
+      inputs.agenix.homeManagerModules.default
       config.flake.modules.homeManager.feature-theme
     ];
 

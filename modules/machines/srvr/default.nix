@@ -154,13 +154,24 @@ in
               #PAPERLESS_URL = "https://paperless.example.com";
             };
           };
-          vaultwarden = {
-          };
+          vaultwarden = { };
         };
 
+        age.secrets.duckdns_token = {
+          file = ../../../secrets/duckdns_token.age;
+          owner = "caddy";
+        };
         services.caddy = {
           enable = true;
+          environmentFile = config.age.secrets.duckdns_token.path;
+          package = pkgs.caddy.withPlugins {
+            plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
+            hash = "sha256-uMYFZJ+dOoahO9+nAU+bGiuFQRmPbPWFwH1uH8xBcFQ=";
+          };
           virtualHosts."random123test.duckdns.org".extraConfig = ''
+            tls {
+              dns duckdns {env.DUCKDNS_TOKEN}
+            }
             reverse_proxy ${tailnetip}:2283
           '';
         };
