@@ -1,6 +1,7 @@
 { lib, config, inputs, ... }:
 let
   domain = "getintogig.duckdns.org";
+  tailnetip = "http://srvr.tail70fe0.ts.net";
   username = "paulm";
 in
 {
@@ -159,35 +160,35 @@ in
 
         services.caddy = {
           enable = true;
-          virtualHosts."immich.getintogig.duckdns.org".extraConfig = ''
-            reverse_proxy http://srvr.tail70fe0.ts.net:2283
+          virtualHosts."random123test.duckdns.org".extraConfig = ''
+            reverse_proxy ${tailnetip}:2283
           '';
         };
 
-        virtualisation.oci-containers = {
-          backend = "podman";
+        # virtualisation.oci-containers = {
+        #   backend = "podman";
 
-          # Nginx-Proxy-Manager for reverse-proxy
-          containers.nginx-proxy-manager = {
-            image = "jc21/nginx-proxy-manager:latest";
-            ports = [ "80:80" "443:443" "81:81" ];
-            # autoStart = true;
-            volumes = [
-              "/var/lib/nginx-proxy-manager/data:/data"
-              "/var/lib/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
-            ];
-            # Optional environment variables
-            environment = {
-              # "DB_SQLITE_FILE" = "/data/database.sqlite";
-              # "DISABLE_IPV6" = "true";
-            };
-          };
-        };
-        systemd.tmpfiles.rules = [
-          "d /var/lib/nginx-proxy-manager 0755 root root -"
-          "d /var/lib/nginx-proxy-manager/data 0755 root root -"
-          "d /var/lib/nginx-proxy-manager/letsencrypt 0755 root root -"
-        ];
+        #   # Nginx-Proxy-Manager for reverse-proxy
+        #   containers.nginx-proxy-manager = {
+        #     image = "jc21/nginx-proxy-manager:latest";
+        #     ports = [ "80:80" "443:443" "81:81" ];
+        #     # autoStart = true;
+        #     volumes = [
+        #       "/var/lib/nginx-proxy-manager/data:/data"
+        #       "/var/lib/nginx-proxy-manager/letsencrypt:/etc/letsencrypt"
+        #     ];
+        #     # Optional environment variables
+        #     environment = {
+        #       # "DB_SQLITE_FILE" = "/data/database.sqlite";
+        #       # "DISABLE_IPV6" = "true";
+        #     };
+        #   };
+        # };
+        # systemd.tmpfiles.rules = [
+        #   "d /var/lib/nginx-proxy-manager 0755 root root -"
+        #   "d /var/lib/nginx-proxy-manager/data 0755 root root -"
+        #   "d /var/lib/nginx-proxy-manager/letsencrypt 0755 root root -"
+        # ];
 
         system.stateVersion = "25.11";
       })
