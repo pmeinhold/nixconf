@@ -8,7 +8,7 @@
 
     xdg.mimeApps = {
       enable = true;
-      defaultApplications = {
+      defaultApplications = lib.mkDefault {
         "application/pdf" = "org.pwmt.zathura.desktop";
         "image/jpeg" = "sxiv.desktop";
         "image/png" = "sxiv.desktop";

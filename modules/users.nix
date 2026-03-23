@@ -138,6 +138,14 @@
             openvpn
           ];
         };
+        xdg.mimeApps = {
+          enable = true;
+          defaultApplications = {
+            "application/pdf" = "firefox.desktop";
+            "image/jpeg" = "sxiv.desktop";
+            "image/png" = "sxiv.desktop";
+          };
+        };
         targets.genericLinux.enable = true;
         programs.foot.server.enable = lib.mkForce false;
       })

@@ -5,6 +5,7 @@
     modules = [
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
+      config.flake.modules.nixos.feature-kmonad
 
       ({ modulesPath, ... }: {
         imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
