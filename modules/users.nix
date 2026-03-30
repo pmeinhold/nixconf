@@ -141,7 +141,8 @@
         xdg.mimeApps = {
           enable = true;
           defaultApplications = {
-            "application/pdf" = "firefox.desktop";
+            # "application/pdf" = "firefox.desktop";
+            "application/pdf" = "org.pwmt.zathura.desktop";
             "image/jpeg" = "sxiv.desktop";
             "image/png" = "sxiv.desktop";
           };
