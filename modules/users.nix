@@ -127,6 +127,7 @@
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
       config.flake.modules.homeManager.feature-defaultapps
+      config.flake.modules.homeManager.feature-kmonad-miryoku
 
       ({ lib, pkgs, ... }: {
         home = {
