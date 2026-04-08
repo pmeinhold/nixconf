@@ -4,7 +4,7 @@
   {
     imports = [
       ./_neovim.nix
-      # ./_tmux.nix
+      ./_tmux.nix
       ./_ssh.nix
       ./_editorconfig.nix
     ];
