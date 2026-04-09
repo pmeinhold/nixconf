@@ -166,7 +166,10 @@
           stateVersion = "25.11";
           username = "pmeinhold";
           homeDirectory = "/home/htc/pmeinhold";
-          packages = with pkgs; [ nix ];
+          packages = with pkgs; [
+            nix
+            home-manager
+          ];
         };
         targets.genericLinux.enable = true;
         programs.fish.interactiveShellInit = ''
