@@ -88,6 +88,7 @@
       nvim-treesitter-parsers.yaml
       nvim-treesitter-parsers.bash
       nvim-treesitter-parsers.rasi
+      nvim-treesitter-parsers.html
       nvim-treesitter-parsers.python
       nvim-treesitter-parsers.hyprlang
       {

@@ -42,8 +42,12 @@ in
         services = {
           caddy = {
             enable = true;
+            # virtualHosts.${domain}.extraConfig = ''
+            #   respond "Hello, world!"
+            # '';
             virtualHosts.${domain}.extraConfig = ''
-              respond "Hello, world!"
+              root * /var/www/pmeinhold
+              file_server
             '';
           };
           openssh = {

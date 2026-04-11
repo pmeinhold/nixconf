@@ -15,7 +15,7 @@
       };
 
       # Nix, other markup langs
-      "*.{nix,typ,yml,yaml,css,scss}" = {
+      "*.{nix,typ,yml,yaml,css,scss,html}" = {
         indent_size = 2;
         insert_final_newline = true;
         trim_trailing_whitespace = true;
