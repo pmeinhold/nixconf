@@ -15,6 +15,12 @@
           device = "nodev";
         };
 
+        hardware.nvidia = {
+          open = false;
+          modesetting.enable = true;
+        };
+        services.xserver.videoDrivers  = [ "nvidia"  ];
+
         services.desktopManager.gnome.enable = true;
         services.displayManager.autoLogin = {
           enable = true;
