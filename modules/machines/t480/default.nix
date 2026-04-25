@@ -9,10 +9,7 @@
       config.flake.modules.nixos.feature-kmonad
 
       ({ pkgs, ... }: {
-        boot.loader.grub = {
-          enable = true;
-          device = "/dev/sda";
-        };
+        boot.loader.systemd-boot.enable = true;
 
         networking.hostName = "t480";
 

@@ -9,6 +9,7 @@
       config.flake.modules.homeManager.feature-kmonad-miryoku
 
       ({ ... }: {
+        feature.kmonad.miryoku.thumbRow = "lalt spc tab ralt cmp del";
         home.stateVersion = "25.11";
       })
 
@@ -24,6 +25,7 @@
       config.flake.modules.homeManager.feature-kmonad-miryoku
 
       ({ ... }: {
+        wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 1920x1080@60, auto, 1" ];
         home.stateVersion = "25.11";
       })
 
