@@ -114,7 +114,7 @@ in
         follow_mouse = 2;
         repeat_delay = 200;
         sensitivity = 0;
-        natural_scroll = false;
+        touchpad.natural_scroll = true;
       };
 
       decoration = {
