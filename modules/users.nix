@@ -15,6 +15,21 @@
     ];
   };
 
+  flake.homeConfigurations."paulm@t480" = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      config.flake.modules.homeManager.feature-base
+      config.flake.modules.homeManager.feature-shell
+      config.flake.modules.homeManager.feature-desktop
+      config.flake.modules.homeManager.feature-kmonad-miryoku
+
+      ({ ... }: {
+        home.stateVersion = "25.11";
+      })
+
+    ];
+  };
+
   flake.homeConfigurations."paulm@srvr" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
