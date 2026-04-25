@@ -105,7 +105,7 @@ in
           warning = 30;
           critical = 15;
         };
-        bat             = lib.mkDefault "BAT1";
+        bat             = lib.mkDefault "BAT0";
         format          = "{icon} {capacity}%";
         format-charging = "{icon}󱐋{capacity}%";
         format-plugged  = "{icon}{capacity}%";
@@ -159,9 +159,9 @@ in
         margin-left: 1em;
         color: @text;
       }
-      #battery { color: @teal; }
       #battery.charging { color: @teal; }
       #battery.warning:not(.charging) { color: @red; }
     '';
+    # #battery { color: @teal; }
   };
 }
