@@ -26,6 +26,7 @@
 
       ({ ... }: {
         wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 1920x1080@60, auto, 1" ];
+        programs.waybar.settings.mainBar."battery".bat = "BAT0";
         home.stateVersion = "25.11";
       })
 

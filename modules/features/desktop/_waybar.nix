@@ -105,10 +105,10 @@ in
           warning = 30;
           critical = 15;
         };
-        bat             = "BAT1";
-        format          = "{icon}  {capacity}%";
-        format-charging = "{icon}󱐋 {capacity}%";
-        format-plugged  = "{icon} {capacity}%";
+        bat             = lib.mkDefault "BAT1";
+        format          = "{icon} {capacity}%";
+        format-charging = "{icon}󱐋{capacity}%";
+        format-plugged  = "{icon}{capacity}%";
         format-icons    = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
       };
       "tray" = {
@@ -155,7 +155,7 @@ in
       #workspaces button.urgent { color: @red; }
       #workspaces button:hover { color: @text; }
 
-      #tray , battery, #backlight, #pulseaudio, #clock {
+      #tray , #battery, #backlight, #pulseaudio, #clock {
         margin-left: 1em;
         color: @text;
       }
