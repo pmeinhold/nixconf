@@ -8,10 +8,10 @@
 
     xdg.mimeApps = {
       enable = true;
-      defaultApplications = lib.mkDefault {
-        "application/pdf" = "org.pwmt.zathura.desktop";
-        "image/jpeg" = "sxiv.desktop";
-        "image/png" = "sxiv.desktop";
+      defaultApplications = {
+        "application/pdf" = lib.mkDefault "org.pwmt.zathura.desktop";
+        "image/jpeg"      = lib.mkDefault "sxiv.desktop";
+        "image/png"       = lib.mkDefault "sxiv.desktop";
       };
     };
   };
