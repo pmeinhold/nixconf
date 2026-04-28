@@ -124,7 +124,6 @@
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
-      config.flake.modules.homeManager.feature-defaultapps
 
       ({ lib, pkgs, ... }: {
         home = {
@@ -147,7 +146,6 @@
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-browser
       config.flake.modules.homeManager.feature-terminal
-      config.flake.modules.homeManager.feature-defaultapps
       config.flake.modules.homeManager.feature-kmonad-miryoku
 
       ({ lib, pkgs, ... }: {
@@ -159,15 +157,6 @@
             nix
             openvpn
           ];
-        };
-        xdg.mimeApps = {
-          enable = true;
-          defaultApplications = {
-            # "application/pdf" = "firefox.desktop";
-            "application/pdf" = "org.pwmt.zathura.desktop";
-            "image/jpeg" = "sxiv.desktop";
-            "image/png" = "sxiv.desktop";
-          };
         };
         targets.genericLinux.enable = true;
         programs.foot.server.enable = lib.mkForce false;

@@ -89,6 +89,7 @@ in
     imports = [
       inputs.agenix.homeManagerModules.default
       config.flake.modules.homeManager.feature-theme
+      config.flake.modules.homeManager.feature-defaultapps
     ];
 
     nixpkgs.config.allowUnfree = true;
