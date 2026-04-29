@@ -105,7 +105,6 @@ in
           warning = 30;
           critical = 15;
         };
-        bat             = lib.mkDefault "BAT0";
         format          = "{icon} {capacity}%";
         format-charging = "{icon}󱐋{capacity}%";
         format-plugged  = "{icon}{capacity}%";

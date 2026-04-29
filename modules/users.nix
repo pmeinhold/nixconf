@@ -29,7 +29,7 @@
           "DP-1,  3440x1440@60, auto, 1"
           "eDP-1, 1920x1080@60, auto, 1, mirror, DP-1"
         ];
-        programs.waybar.settings.mainBar."battery".bat = "BAT0";
+        # programs.waybar.settings.mainBar."battery".bat = "BAT0";
         home.stateVersion = "25.11";
       })
 
