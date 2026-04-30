@@ -35,7 +35,7 @@ in
       systemPackages = with pkgs; [
         git
         neovim
-        inputs.agenix.packages.${system}.default
+        inputs.agenix.packages.${stdenv.hostPlatform.system}.default
       ];
       variables.EDITOR = "nvim";
     };
