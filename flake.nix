@@ -8,9 +8,6 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
-    jovian.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
 
@@ -21,8 +18,14 @@
     catppuccin.url = "github:catppuccin/nix/release-25.11";
     catppuccin-unstable.url = "github:catppuccin/nix";
 
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
+
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
+    jovian.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs:

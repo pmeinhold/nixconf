@@ -46,10 +46,10 @@
           xserver.videoDrivers = [ "nvidia" ];
           throttled.enable = true;
           tailscale.useRoutingFeatures = "client";
-          logind = {
-            lidSwitch = "lock";
-            lidSwitchExternalPower = "lock";
-            lidSwitchDocked = "lock";
+          logind.settings.Login = {
+            HandleLidSwitch = "lock";
+            HandleLidSwitchExternalPower = "lock";
+            HandleLidSwitchDocked = "lock";
           };
           tlp = {
             enable = false;

@@ -5,6 +5,11 @@ let
 in
 {
   flake.modules.nixos.feature-desktop = { lib, pkgs, ... }: {
+
+    imports = [
+      config.flake.modules.nixos.feature-niri
+    ];
+
     services = {
       displayManager.gdm.enable = lib.mkDefault true;
 
