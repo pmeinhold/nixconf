@@ -8,6 +8,7 @@ in
 
     imports = [
       config.flake.modules.nixos.feature-niri
+      config.flake.modules.nixos.feature-noctalia
     ];
 
     services = {
@@ -125,6 +126,8 @@ in
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-defaultapps
+      flakeConfig.flake.modules.homeManager.feature-niri
+      flakeConfig.flake.modules.homeManager.feature-noctalia
     ];
 
     # Use catppuccin cursors if available
