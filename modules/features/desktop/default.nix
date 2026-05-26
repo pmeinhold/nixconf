@@ -147,6 +147,7 @@ in
       brightnessctl
       spotify
       signal-desktop
+      telegram-desktop
     ];
 
     xdg.portal = {
