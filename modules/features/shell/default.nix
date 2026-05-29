@@ -31,6 +31,7 @@
         set -U fish_greeting
       '';
     };
+    programs.opencode.enable = true;
     programs.yazi.enable = true;
     programs.zoxide = {
       enable = true;
