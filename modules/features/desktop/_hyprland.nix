@@ -69,7 +69,7 @@ in
       monitor = lib.mkDefault [ ", highres, auto, 1, mirror, eDP-1" ];
 
       exec-once = [
-        "swww-daemon || swww img ~/dev/nixconf/pics/waves-light.jpg"
+        "awww-daemon || awww img ~/dev/nixconf/pics/waves-light.jpg"
         "udiskie"
         "nm-applet"
         "blueman-applet"

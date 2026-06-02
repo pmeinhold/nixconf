@@ -87,7 +87,7 @@ in
         # desktop requirements
         dunst
         libnotify
-        swww
+        awww
         waybar
         cbatticon
         gnupg
