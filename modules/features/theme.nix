@@ -23,6 +23,10 @@ in
       enable = true;
       inherit flavor accent;
       cursors.accent = "light";
+
+      # exclusions
+      cursors.enable = false;
+      hyprland.enable = false;
     };
 
     # Catppuccin GTK theme is archived, so I must explicitly configure it.

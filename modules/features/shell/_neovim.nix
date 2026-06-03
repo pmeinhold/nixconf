@@ -9,7 +9,7 @@
     defaultEditor = lib.mkDefault true;
     vimAlias = lib.mkDefault true;
 
-    extraLuaConfig = #lua
+    initLua = #lua
     ''
       vim.g.mapleader = ' '
       vim.g.maplocalleader = ','
@@ -134,8 +134,7 @@
         type = "lua";
         config = #lua
         ''
-          local treesitter = require("nvim-treesitter.configs")
-          treesitter.setup({ -- enable syntax highlighting
+          require('nvim-treesitter').setup({ -- enable syntax highlighting
             highlight = {
               enable = true,
             },

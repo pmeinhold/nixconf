@@ -131,8 +131,8 @@ in
     ];
 
     # Use catppuccin cursors if available
-    catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
-    home.pointerCursor.gtk.enable = true;
+    # catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
+    # home.pointerCursor.gtk.enable = true;
     gtk.enable = true;
     qt.enable = true;
 
