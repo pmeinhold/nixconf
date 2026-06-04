@@ -25,7 +25,6 @@ in
       cursors.accent = "light";
 
       # exclusions
-      cursors.enable = false;
       hyprland.enable = false;
     };
 

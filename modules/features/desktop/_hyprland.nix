@@ -101,7 +101,7 @@ in
 
       master = {
         new_on_top = false;
-        inherit_fullscreen = true;
+        # inherit_fullscreen = true;
       };
 
       gestures = {

@@ -3,7 +3,7 @@ let
   hasFirefoxAddons = inputs ? firefox-addons;
 in
 {
-  flake.modules.homeManager.feature-browser = { lib, pkgs, ... }:
+  flake.modules.homeManager.feature-browser = { config, lib, pkgs, ... }:
   {
     programs.chromium = {
       enable = true;
@@ -66,6 +66,7 @@ in
     };
 
     programs.firefox.enable = true;
+    programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
     programs.firefox.profiles.default = {
       id = 0;
       name = "default";

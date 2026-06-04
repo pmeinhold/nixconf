@@ -12,7 +12,11 @@ in
     ];
 
     services = {
-      displayManager.gdm.enable = lib.mkDefault true;
+      # displayManager.gdm.enable = lib.mkDefault true;
+      # displayManager.sddm = {
+      #   enable = lib.mkDefault true;
+      #   wayland.enable = lib.mkDefault true;
+      # };
 
       blueman.enable = true;
       udisks2.enable = true;
@@ -131,7 +135,8 @@ in
     ];
 
     # Use catppuccin cursors if available
-    # catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
+    catppuccin.cursors.enable = lib.optionalAttrs hasCatppuccin true;
+
     # home.pointerCursor.gtk.enable = true;
     gtk.enable = true;
     qt.enable = true;
