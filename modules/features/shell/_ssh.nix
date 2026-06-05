@@ -24,6 +24,11 @@
         user = "pmeinhold";
         proxyJump = "login01";
       };
+      "z3" = {
+        hostname = "z3.zib.de";
+        user = "pmeinhold";
+        proxyJump = "login01";
+      };
       "opt-008545" = {
         hostname = "opt-008545.zib.de";
         user = "pmeinhold";

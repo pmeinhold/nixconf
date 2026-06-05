@@ -34,13 +34,15 @@
             open = false; # Only set to false if older than Turing architecture (2018)
             nvidiaSettings = true;
             prime = {
-              sync.enable = true;
+              # sync.enable = true;
               # find out by 'sudo lshw -c display' (and convert to decimal)
               intelBusId = "PCI:0:2:0";
               nvidiaBusId = "PCI:1:0:0";
             };
           };
         };
+        # Disable Intel video which might interfere with nvidia
+        # boot.kernelParams = [ "module_blacklist=i915" ];
 
         services = {
           xserver.videoDrivers = [ "nvidia" ];
