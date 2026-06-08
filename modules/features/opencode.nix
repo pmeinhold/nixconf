@@ -23,6 +23,7 @@
               "deepseek-coder-v2:latest".name = "deepseek-coder-v2:latest";
               "deepseek-r1:14b".name = "deepseek-r1:14b";
               "llama3:70b".name = "llama3:70b";
+              "qwen3-coder-next:latest".name = "qwen3-coder-next:latest";
             };
           };
         };
