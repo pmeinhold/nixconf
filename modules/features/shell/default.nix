@@ -1,4 +1,4 @@
-{ ... }:
+{ config, inputs, ... }:
 {
   flake.modules.homeManager.feature-shell = { lib, pkgs, ... }:
   {
@@ -7,6 +7,7 @@
       ./_tmux.nix
       ./_ssh.nix
       ./_editorconfig.nix
+      config.flake.modules.homeManager.feature-opencode
     ];
 
     home.packages = with pkgs; [
@@ -30,32 +31,6 @@
         fish_vi_key_bindings
         set -U fish_greeting
       '';
-    };
-    programs.opencode = {
-      enable = true;
-      settings = {
-        provider = {
-          zib = {
-            npm = "@ai-sdk/openai-compatible";
-            name = "ZIB";
-            options = {
-              baseURL = "https://ollama.zib.de/api";
-              # apiKey = "{env:ZIB_API_KEY}";
-            };
-            models = {
-              "llama3.2:latest" = {
-                name = "llama3.2:latest";
-                # options = {
-                #   structuredOutputs = false;
-                # };
-              };
-              "deepseek-coder-v2:latest".name = "deepseek-coder-v2:latest";
-              "deepseek-r1:14b".name = "deepseek-r1:14b";
-              "llama3:70b".name = "llama3:70b";
-            };
-          };
-        };
-      };
     };
     programs.yazi.enable = true;
     programs.zoxide = {
