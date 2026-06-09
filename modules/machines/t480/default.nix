@@ -8,7 +8,7 @@
       config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-kmonad
 
-      ({ pkgs, ... }: {
+      ({ config, pkgs, ... }: {
         boot.loader.systemd-boot.enable = true;
 
         networking.hostName = "t480";
@@ -33,6 +33,7 @@
             powerManagement.finegrained = false;
             open = false; # Only set to false if older than Turing architecture (2018)
             nvidiaSettings = true;
+            package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
             prime = {
               # sync.enable = true;
               # find out by 'sudo lshw -c display' (and convert to decimal)
