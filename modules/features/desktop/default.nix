@@ -12,7 +12,7 @@ in
     ];
 
     services = {
-      # displayManager.gdm.enable = lib.mkDefault true;
+      displayManager.gdm.enable = lib.mkDefault true;
       # displayManager.sddm = {
       #   enable = lib.mkDefault true;
       #   wayland.enable = lib.mkDefault true;
