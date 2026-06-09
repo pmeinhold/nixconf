@@ -35,7 +35,7 @@
             nvidiaSettings = true;
             package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
             prime = {
-              # sync.enable = true;
+              sync.enable = true;
               # find out by 'sudo lshw -c display' (and convert to decimal)
               intelBusId = "PCI:0:2:0";
               nvidiaBusId = "PCI:1:0:0";
