@@ -2,6 +2,9 @@
 {
   flake.modules.homeManager.feature-opencode = { lib, pkgs, ... }:
   {
+    programs.claude-code = {
+      enable = true;
+    };
     programs.opencode = {
       enable = true;
       settings = {
