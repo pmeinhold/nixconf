@@ -134,21 +134,21 @@
         ''
         '';
       }
-      {
-        plugin = nvim-treesitter;
-        type = "lua";
-        config = #lua
-        ''
-          -- nvim-treesitter is archived; Neovim 0.12 uses vim.treesitter built-in.
-          -- The plugin is kept only for its query files (.scm highlights etc.).
-          -- Parsers are pre-built via nixpkgs nvim-treesitter-parsers.*.
-          vim.api.nvim_create_autocmd('FileType', {
-            callback = function(event)
-              pcall(vim.treesitter.start, event.buf)
-            end,
-          })
-        '';
-      }
+      # {
+        # plugin = nvim-treesitter;
+        # type = "lua";
+        # config = #lua
+        # ''
+        #   -- nvim-treesitter is archived; Neovim 0.12 uses vim.treesitter built-in.
+        #   -- The plugin is kept only for its query files (.scm highlights etc.).
+        #   -- Parsers are pre-built via nixpkgs nvim-treesitter-parsers.*.
+        #   vim.api.nvim_create_autocmd('FileType', {
+        #     callback = function(event)
+        #       pcall(vim.treesitter.start, event.buf)
+        #     end,
+        #   })
+        # '';
+      # }
       {
         plugin = telescope-nvim;
         type = "lua";
@@ -180,32 +180,6 @@
           \ }
         '';
       }
-      # {
-        # DEBUGGER API
-        # Check https://igorlfs.github.io/neovim-cpp-dbg
-        # plugin = nvim-dap;
-        # type = "lua";
-      # }
-      # {
-      #   plugin = harpoon2;
-      #   type = "lua";
-      #   config = ''
-      #     local harpoon = require("harpoon")
-      #     harpoon:setup() -- REQUIRED
-      #     -- Add buffer to harpoon list
-      #     vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
-      #     -- Toggle previous & next buffers stored within Harpoon list
-      #     vim.keymap.set("n", "<leader>hk", function() harpoon:list():prev() end)
-      #     vim.keymap.set("n", "<leader>hj", function() harpoon:list():next() end)
-      #     -- Direct target entries
-      #     for i=1,9 do
-      #       vim.keymap.set("n", string.format("<leader>%d", i), function() harpoon:list():select(i) end)
-      #     end
-      #                                                                                                                                                                                         local file_paths = {}
-      #     vim.keymap.set("n", "<leader>hh",
-      #       function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      #   '';
-      # }
     ];
   };
 }
