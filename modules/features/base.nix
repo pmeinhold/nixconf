@@ -35,6 +35,7 @@ in
       systemPackages = with pkgs; [
         git
         neovim
+        jujutsu
         inputs.agenix.packages.${stdenv.hostPlatform.system}.default
       ];
       variables.EDITOR = "nvim";

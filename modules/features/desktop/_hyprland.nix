@@ -37,6 +37,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    configType = "hyprlang";
 
     plugins = with pkgs; [
       hyprlandPlugins.hyprbars

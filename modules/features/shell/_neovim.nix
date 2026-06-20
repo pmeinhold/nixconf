@@ -9,8 +9,13 @@
     defaultEditor = lib.mkDefault true;
     vimAlias = lib.mkDefault true;
 
+    withPython3 = false;
+    withRuby = false;
+
     initLua = #lua
     ''
+      vim.cmd('syntax on')
+
       vim.g.mapleader = ' '
       vim.g.maplocalleader = ','
 
@@ -134,26 +139,14 @@
         type = "lua";
         config = #lua
         ''
-          --require('nvim-treesitter').setup({ -- enable syntax highlighting
-          --  highlight = {
-          --    enable = true,
-          --  },
-          --  indent = { enable = true },
-          --})
-          --vim.filetype.add({
-          --  filename = {
-          --    [".papis.config"] = "dosini",
-          --  },
-          --})
-          -- The new nvim-treesitter (main branch) no longer enables
-          -- highlighting via setup(). Enable it via a FileType autocmd.
-          --vim.api.nvim_create_autocmd('FileType', {
-          --  callback = function(event)
-          --    pcall(vim.treesitter.start, event.buf)
-          --    -- treesitter-based indentation (experimental)
-          --    vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          --  end,
-          --})
+          -- nvim-treesitter is archived; Neovim 0.12 uses vim.treesitter built-in.
+          -- The plugin is kept only for its query files (.scm highlights etc.).
+          -- Parsers are pre-built via nixpkgs nvim-treesitter-parsers.*.
+          vim.api.nvim_create_autocmd('FileType', {
+            callback = function(event)
+              pcall(vim.treesitter.start, event.buf)
+            end,
+          })
         '';
       }
       {

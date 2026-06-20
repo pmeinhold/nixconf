@@ -29,6 +29,7 @@ in
     };
 
     # Catppuccin GTK theme is archived, so I must explicitly configure it.
+    gtk.gtk4.theme = null;
     gtk.theme = {
       name = "Catppuccin-GTK-Dark";
       package = pkgs.magnetic-catppuccin-gtk;
