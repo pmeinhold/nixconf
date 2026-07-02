@@ -46,7 +46,7 @@ in
         ];
       };
       "custom/launcher" = {
-        on-click = config.home.file."showbinds".target;
+        on-click = "wlr-which-key";
         format = " ";
         tooltip = false;
       };

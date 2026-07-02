@@ -130,6 +130,7 @@ in
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-defaultapps
+      flakeConfig.flake.modules.homeManager.feature-keychords
       flakeConfig.flake.modules.homeManager.feature-niri
       flakeConfig.flake.modules.homeManager.feature-noctalia
     ];

@@ -9,30 +9,28 @@ let
   fullWindowColor = "rgb(a6e3a1)";
 in
 {
-  # Show keybinds script
-  # https://github.com/hyprland-community/hypr-binds?tab=readme-ov-file
-  home.packages = with pkgs; [ jq ]; # for hypr-binds-script
-  home.file."showbinds" = {
-    executable = true;
-    target = ".config/showbinds.sh";
-    text = #bash
-    ''
-      hyprctl binds -j |
-        eval "$(
-          jq -r '
-            map({mod:.modmask|tostring,key:.key,code:.keycode|tostring,desc:.description,dp:.dispatcher,arg:.arg,sub:.submap}) |
-            map(.mod |= {"0":"","1":"SHIFT+","4":"CTRL+","5":"SHIFT+CTRL+","64":"SUPER+","65":"SUPER+SHIFT+","68":"SUPER+CTRL+","8":"ALT+"} [.]) |
-            map(.code |= {"59":"Comma","60":"Dot"} [.]) |
-            sort_by(.mod) | .[] |
-            select(.sub == "") |
-            select(.desc != "") |
-            [ "printf", "<span color=\"#cba6f7\"><b>%-24s</b></span> <span color=\"#89dceb\"><i>%-28s</i></span> <span color=\"#6c7086\"><i>%s</i></span>\\n", (.mod + .key), .desc, (.dp + " " + .arg)] | @sh'
-        )" |
-        rofi -dmenu -markup-rows -i |
-        sed 's/.*<i>\([^<]*\)<\/i>.*/\1/' |
-        xargs -I {} hyprctl dispatch {}
-    '';
-  };
+  # Replaced by wlr-which-key (see keychords.nix)
+  # home.packages = with pkgs; [ jq ];
+  # home.file."showbinds" = {
+  #   executable = true;
+  #   target = ".config/showbinds.sh";
+  #   text = ''
+  #     hyprctl binds -j |
+  #       eval "$(
+  #         jq -r '
+  #           map({mod:.modmask|tostring,key:.key,code:.keycode|tostring,desc:.description,dp:.dispatcher,arg:.arg,sub:.submap}) |
+  #           map(.mod |= {"0":"","1":"SHIFT+","4":"CTRL+","5":"SHIFT+CTRL+","64":"SUPER+","65":"SUPER+SHIFT+","68":"SUPER+CTRL+","8":"ALT+"} [.]) |
+  #           map(.code |= {"59":"Comma","60":"Dot"} [.]) |
+  #           sort_by(.mod) | .[] |
+  #           select(.sub == "") |
+  #           select(.desc != "") |
+  #           [ "printf", "<span color=\"#cba6f7\"><b>%-24s</b></span> <span color=\"#89dceb\"><i>%-28s</i></span> <span color=\"#6c7086\"><i>%s</i></span>\\n", (.mod + .key), .desc, (.dp + " " + .arg)] | @sh'
+  #       )" |
+  #       rofi -dmenu -markup-rows -i |
+  #       sed 's/.*<i>\([^<]*\)<\/i>.*/\1/' |
+  #       xargs -I {} hyprctl dispatch {}
+  #   '';
+  # };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -143,29 +141,26 @@ in
         force_zero_scaling = true;
       };
 
-      "$tfl"      = "hyprctl --batch 'dispatch togglefloating ; dispatch resizeactive exact 50% 50% ; dispatch centerwindow 1'";
-      "$mod"      = "SUPER";
-      "$browser"  = "firefox";
-      "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
-      "$menu"     = "rofi -show drun";
-      "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/$(date +'%s_grim.png')"; # Screenshot utility
-      "$term"     =
-        if config.programs.foot.enable then "foot"
-        else if config.programs.alacritty.enable then "alacritty"
-        else if config.programs.wezterm.enable  then "wezterm"
-        else "notify-send 'none of foot, alacritty, or wezterm installed'";
+      "$tfl" = "hyprctl --batch 'dispatch togglefloating ; dispatch resizeactive exact 50% 50% ; dispatch centerwindow 1'";
+      "$mod" = "SUPER";
+      # Moved to keychords.nix (wlr-which-key)
+      # "$browser"  = "firefox";
+      # "$logout"   = "loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')";
+      # "$menu"     = "rofi -show drun";
+      # "$scrnshot" = "grim -g \"$(slurp)\" $HOME/Desktop/$(date +'%s_grim.png')";
+      # "$term"     = if config.programs.foot.enable then "foot" else ...;
 
       # Binds with description
       bindd = [
-        "$mod,          space,  Show keybinds,            exec, ${config.home.file."showbinds".target}"
-        "$mod,          Return, Open terminal,            exec, $term"
-        "$mod SHIFT,    Return, Open launcher,            exec, $menu"
-        "$mod,          B,      Open browser,             exec, $browser"
-        "$mod,          P,      Take screenshot,          exec, $scrnshot"
-        ",              Print,  Take screenshot,          exec, $scrnshot"
-        "$mod,          Escape, Lock screen,              exec, hyprlock"
-        "$mod CONTROL,  Escape, Shutdown,                 exec, systemctl poweroff"
-        "$mod SHIFT,    Escape, Logout,                   exec, $logout"
+        "$mod,          space,  App keychords,            exec, wlr-which-key"
+        # Moved to keychords.nix (wlr-which-key):
+        # "$mod,          Return, Open terminal,            exec, $term"
+        # "$mod SHIFT,    Return, Open launcher,            exec, $menu"
+        # "$mod,          B,      Open browser,             exec, $browser"
+        # "$mod,          P,      Take screenshot,          exec, $scrnshot"
+        # "$mod,          Escape, Lock screen,              exec, hyprlock"
+        # "$mod CONTROL,  Escape, Shutdown,                 exec, systemctl poweroff"
+        # "$mod SHIFT,    Escape, Logout,                   exec, $logout"
         "$mod SHIFT,    Q,      Close window,             killactive"
         "$mod,          F,      Maximize,                 fullscreen, 1"
         "$mod SHIFT,    F,      Fullscreen,               fullscreen, 0"
@@ -192,6 +187,7 @@ in
         "$mod SHIFT,    4,      Move to workspace 4,      movetoworkspacesilent, 4"
       ];
       bind = [
+        ",     Print,                   exec, $HOME/.config/keychords/screenshot.sh"
         ",     XF86MonBrightnessUp,     exec, brightnessctl set +5%"
         ",     XF86MonBrightnessDown,   exec, brightnessctl set 5%-"
         "$mod, XF86AudioRaiseVolume,    exec, brightnessctl set +5%"
