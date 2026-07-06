@@ -74,7 +74,6 @@ in
         "blueman-applet"
         "tailscale-systray"
         "waybar"
-        "stretchly"
       ];
 
       general = {
@@ -152,7 +151,7 @@ in
 
       # Binds with description
       bindd = [
-        "$mod,          space,  App keychords,            exec, wlr-which-key"
+        "$mod,          Return, App keychords,            exec, wlr-which-key"
         # Moved to keychords.nix (wlr-which-key):
         # "$mod,          Return, Open terminal,            exec, $term"
         # "$mod SHIFT,    Return, Open launcher,            exec, $menu"

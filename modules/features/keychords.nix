@@ -3,7 +3,7 @@
   flake.modules.homeManager.feature-keychords = { config, lib, pkgs, ... }:
   let
     term =
-      if config.programs.foot.enable      then "foot"
+      if      config.programs.foot.enable      then "foot"
       else if config.programs.alacritty.enable then "alacritty"
       else if config.programs.wezterm.enable   then "wezterm"
       else "notify-send 'No terminal configured'";
@@ -40,13 +40,13 @@
       border_width: 2
       corner_r: 8
       padding: 15
-      anchor: bottom-left
+      anchor: center
       margin_left: 10
       margin_bottom: 10
       inhibit_compositor_keyboard_shortcuts: true
 
       menu:
-        - key: "t"
+        - key: "Return"
           desc: Terminal
           cmd: ${term}
         - key: "b"

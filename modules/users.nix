@@ -75,7 +75,6 @@
           video_driver = "glcore"; # vulkan, glcore, gl, gl1, sdl
         };
         home.packages = with pkgs; [
-          stretchly
           prismlauncher # minecraft
           discord
         ];
