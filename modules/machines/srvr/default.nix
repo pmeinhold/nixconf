@@ -1,8 +1,9 @@
 { lib, config, inputs, ... }:
 let
-  domain = "getintogig.duckdns.org";
-  domain2 = "random123test.duckdns.org";
-  domain3 = "meinhold.duckdns.org";
+  domaina = "meinhold.duckdns.org";
+  domainb = "getintogig.duckdns.org";
+  domainc = "random123test.duckdns.org";
+  domain = domainc;
   tailnetip = "http://srvr.tail70fe0.ts.net";
   username = "paulm";
 in
@@ -115,7 +116,7 @@ in
             settings = {
               MICROBIN_BIND = "0.0.0.0";
               MICROBIN_PORT = 8081;
-              MICROBIN_PUBLIC_PATH = "https://microbin.${domain2}";
+              MICROBIN_PUBLIC_PATH = "https://microbin.${domain}";
               MICROBIN_DISABLE_TELEMETRY = true;
             };
           };
@@ -137,7 +138,7 @@ in
           paperless = {
             enable = true;
             port = 28981;
-            domain = "paperless.${domain2}";
+            domain = "paperless.${domain}";
             address = "0.0.0.0";
             user = "${username}";
             mediaDir = "/mnt/storage/Paperless";
@@ -168,7 +169,7 @@ in
           environmentFile = config.age.secrets.duckdns_token.path;
           package = pkgs.caddy.withPlugins {
             plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
-            hash = "sha256-uMYFZJ+dOoahO9+nAU+bGiuFQRmPbPWFwH1uH8xBcFQ=";
+            hash = "sha256-ievwHFPgn5Nb/AHpms9glR3iRB+RYCkEnB/HalUwbaY=";
           };
           # virtualHosts."${...}".extraConfig = ''
           #   tls {
@@ -176,15 +177,15 @@ in
           #   }
           #   reverse_proxy ${tailnetip}:2283
           # '';
-          virtualHosts."*.${domain2}".extraConfig = ''
+          virtualHosts."*.${domain}".extraConfig = ''
             tls {
               dns duckdns {env.DUCKDNS_TOKEN}
             }
-            @immich host immich.${domain2}
+            @immich host immich.${domain}
             handle @immich {
               reverse_proxy ${tailnetip}:2283
             }
-            @jf host jf.${domain2}
+            @jf host jf.${domain}
             handle @jf {
               reverse_proxy ${tailnetip}:8096
             }
