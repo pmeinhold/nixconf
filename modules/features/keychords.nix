@@ -41,38 +41,37 @@
       corner_r: 8
       padding: 15
       anchor: center
-      margin_left: 10
-      margin_bottom: 10
       inhibit_compositor_keyboard_shortcuts: true
 
       menu:
         - key: "Return"
-          desc: Terminal
+          desc:   Terminal
           cmd: ${term}
         - key: "b"
-          desc: Browser
+          desc: 󰈹  Browser
           cmd: firefox
         - key: "r"
-          desc: Launcher
+          desc: 󱓞  Launcher
           cmd: rofi -show drun
         - key: "p"
-          desc: Screenshot
+          desc: 󰹑  Screenshot
           cmd: ${home}/.config/keychords/screenshot.sh
         - key: "l"
-          desc: Lock
+          desc: 󰍁  Lock
           cmd: hyprlock
         - key: "s"
           desc: System
           submenu:
             - key: "s"
-              desc: Shutdown
+              desc: 󰐥  Shutdown
               cmd: systemctl poweroff
             - key: "r"
-              desc: Reboot
+              desc: 󰜉  Reboot
               cmd: systemctl reboot
             - key: "l"
-              desc: Logout
+              desc: 󰿅  Logout
               cmd: ${home}/.config/keychords/logout.sh
     '';
+    # 
   };
 }
