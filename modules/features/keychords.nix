@@ -18,7 +18,7 @@
       target = ".config/keychords/screenshot.sh";
       text = ''
         #!/bin/sh
-        grim -g "$(slurp)" "$HOME/Desktop/$(date +'%s_grim.png')"
+        grim -g "$(slurp)" "$HOME/Desktop/$(date +'%F_%T.png')"
       '';
     };
 
