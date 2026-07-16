@@ -7,5 +7,6 @@
 
   flake.modules.homeManager.feature-niri = { lib, pkgs, ... }:
   {
+    xdg.configFile."niri/config.kdl".source = ./niri.kdl;
   };
 }
