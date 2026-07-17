@@ -76,7 +76,8 @@ layout {
 }
 
 // Match hyprland's exec-once list.
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
+spawn-at-startup "noctalia"
 spawn-at-startup "udiskie"
 spawn-at-startup "nm-applet"
 spawn-at-startup "blueman-applet"
