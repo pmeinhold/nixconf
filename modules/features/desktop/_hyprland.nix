@@ -73,7 +73,8 @@ in
         "nm-applet"
         "blueman-applet"
         "tailscale-systray"
-        "waybar"
+        "noctalia"
+        # "waybar"
       ];
 
       general = {
