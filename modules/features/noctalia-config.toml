@@ -1,6 +1,21 @@
 [bar.default]
+capsule = true
+end = [ "media", "tray", "notifications", "brightness", "battery", "volume", "network", "control-center" ]
 margin_ends = 0
 radius = 0
+shadow = false
+start = [ "launcher", "workspaces", "active_window" ]
+thickness = 32
+widget_spacing = 8
+
+[calendar]
+enabled = true
+
+    [calendar.account.radicale]
+    provider = "custom"
+    server_url = "http://srvr:5232/"
+    type = "caldav"
+    username = "paulm"
 
 [dock]
 auto_hide = true
@@ -39,10 +54,15 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
         show_login_button = true
         show_password_hint = true
 
+[shell.panel]
+open_near_click_control_center = true
+
 [theme]
 builtin = "Catppuccin"
+community_palette = "Oxocarbon"
 mode = "dark"
 source = "builtin"
+wallpaper_scheme = "m3-content"
 
 [wallpaper]
 directory = "/home/paulm/dev/nixconf/pics"
