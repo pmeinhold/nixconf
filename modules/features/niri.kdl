@@ -128,7 +128,7 @@ window-rule {
 //
 binds {
     // ── App keychords (wlr-which-key, WM-agnostic) ──────────────────────
-    Mod+Space { spawn "wlr-which-key"; }
+    Mod+Return { spawn "wlr-which-key"; }
 
     // ── Hotkey reference ─────────────────────────────────────────────────
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -138,7 +138,7 @@ binds {
     Mod+F       { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
     Mod+Ctrl+F  repeat=false { toggle-window-floating; }
-    Mod+V       { switch-focus-between-floating-and-tiling; }
+    // Mod+V       { switch-focus-between-floating-and-tiling; }
 
     // ── Focus navigation (hjkl + arrows) ────────────────────────────────
     Mod+H     { focus-column-left; }
