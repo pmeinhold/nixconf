@@ -108,12 +108,6 @@ window-rule {
     clip-to-geometry true
 }
 
-// WezTerm initial-configure workaround.
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
 // Firefox picture-in-picture floats.
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
