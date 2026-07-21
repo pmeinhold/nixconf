@@ -54,8 +54,15 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
         show_login_button = true
         show_password_hint = true
 
-[shell.panel]
-open_near_click_control_center = true
+[shell]
+avatar_path = "/home/paulm/dev/nixconf/pics/face.jpg"
+
+    [shell.launcher]
+    categories = false
+    compact = true
+
+    [shell.panel]
+    open_near_click_control_center = true
 
 [theme]
 builtin = "Catppuccin"
