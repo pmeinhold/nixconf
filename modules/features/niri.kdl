@@ -79,11 +79,10 @@ layout {
 // spawn-at-startup "waybar"
 spawn-at-startup "noctalia"
 spawn-at-startup "udiskie"
-spawn-at-startup "nm-applet"
-spawn-at-startup "blueman-applet"
-spawn-at-startup "tailscale-systray"
-spawn-at-startup "stretchly"
-spawn-sh-at-startup "awww-daemon || awww img ~/dev/nixconf/pics/waves-light.jpg"
+// spawn-at-startup "nm-applet"
+// spawn-at-startup "blueman-applet"
+// spawn-at-startup "tailscale-systray"
+// spawn-sh-at-startup "awww-daemon || awww img ~/dev/nixconf/pics/waves-light.jpg"
 
 hotkey-overlay {
     // wlr-which-key handles discoverability; skip niri's built-in overlay at startup.
@@ -112,6 +111,14 @@ window-rule {
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+// Floating Noctalia settings window.
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
 }
 
 // ── Binds ───────────────────────────────────────────────────────────────────
