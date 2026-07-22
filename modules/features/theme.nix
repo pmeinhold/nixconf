@@ -26,6 +26,7 @@ in
 
       # exclusions
       hyprland.enable = false;
+      zathura.enable = false;
     };
 
     # Catppuccin GTK theme is archived, so I must explicitly configure it.

@@ -2,9 +2,16 @@
 {
   flake.modules.homeManager.feature-defaultapps = { config, lib, pkgs, ... }: {
     home.packages = with pkgs; [
-      zathura
+      # zathura
       sxiv
     ];
+
+    programs.zathura = {
+      enable = true;
+      options = {
+        "selection-clipboard" = "clipboard";
+      };
+    };
 
     xdg.mimeApps = {
       enable = true;
