@@ -26,7 +26,7 @@ show_instance_count = false
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@winit", "lockscreen-login-box@eDP-1", "lockscreen-login-box@HDMI-A-1" ]
+widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -115,14 +115,19 @@ wallpaper_scheme = "m3-content"
 
 [wallpaper]
 directory = "/home/paulm/dev/nixconf/pics"
-enabled = false
-fill_mode = "fit"
+enabled = true
+fill_mode = "center"
 
     [wallpaper.default]
-    path = "/nix/store/1wjl2g3zc54jz5cplfl3qpmf3ksws1dk-noctalia-5.0.0/share/noctalia/assets/noctalia-wallpaper.png"
+    path = "/home/paulm/dev/nixconf/pics/waves-light.jpg"
 
     [wallpaper.last]
-    path = "/nix/store/1wjl2g3zc54jz5cplfl3qpmf3ksws1dk-noctalia-5.0.0/share/noctalia/assets/noctalia-wallpaper.png"
+    path = "/home/paulm/dev/nixconf/pics/waves-light.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/paulm/dev/nixconf/pics/waves-light.jpg"
 
 [widget.workspaces]
 empty_color = "on_primary"
+focused_color = "tertiary"
+occupied_color = "primary"
