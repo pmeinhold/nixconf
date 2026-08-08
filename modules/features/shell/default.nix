@@ -17,7 +17,7 @@
       bitwarden-cli
       geteduroam-cli
       # for yazi:
-      poppler
+      poppler-utils
     ];
 
     # SHELL

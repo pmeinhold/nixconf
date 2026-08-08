@@ -18,21 +18,21 @@ in
         programs.gamemode.enable = true;
 
         services.desktopManager.gnome.enable = true;
-        services.displayManager.gdm.enable = false;
-        services.displayManager.sddm.wayland.enable = true;
+        services.displayManager.gdm.enable = true;
+        # services.displayManager.sddm.wayland.enable = true;
         # services.displayManager.autoLogin.user = "paulm";
 
         # Use jovian if available
-        imports = lib.optional hasJovian inputs.jovian.nixosModules.default;
-        jovian = lib.optionalAttrs hasJovian {
-          steam = {
-            enable = true;
-            autoStart = true;
-            user = "paulm";
-            desktopSession = "gnome";
-          };
-          devices.steamdeck.enable = true;
-        };
+        # imports = lib.optional hasJovian inputs.jovian.nixosModules.default;
+        # jovian = lib.optionalAttrs hasJovian {
+        #   steam = {
+        #     enable = true;
+        #     autoStart = true;
+        #     user = "paulm";
+        #     desktopSession = "gnome";
+        #   };
+        #   devices.steamdeck.enable = true;
+        # };
 
         system.stateVersion = "25.11";
       })
