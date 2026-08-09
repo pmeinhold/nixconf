@@ -19,6 +19,10 @@ in
 
         services.desktopManager.gnome.enable = true;
         services.displayManager.gdm.enable = true;
+        services.displayManager.autoLogin = {
+          enable = true;
+          user = "paulm";
+        };
 
         services.openssh = {
           enable = true;
