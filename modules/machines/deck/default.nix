@@ -19,6 +19,17 @@ in
 
         services.desktopManager.gnome.enable = true;
         services.displayManager.gdm.enable = true;
+
+        services.openssh = {
+          enable = true;
+          ports = [ 69 ];
+          settings = {
+            PermitRootLogin = "no";
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+          };
+        };
+
         # services.displayManager.sddm.wayland.enable = true;
         # services.displayManager.autoLogin.user = "paulm";
 
