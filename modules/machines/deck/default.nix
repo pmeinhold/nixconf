@@ -30,6 +30,12 @@ in
           };
         };
 
+        programs.steam = {
+          enable = true;
+          remotePlay.openFirewall = false;
+          dedicatedServer.openFirewall = false;
+        };
+
         # services.displayManager.sddm.wayland.enable = true;
         # services.displayManager.autoLogin.user = "paulm";
 
