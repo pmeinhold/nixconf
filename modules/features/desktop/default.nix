@@ -100,10 +100,10 @@ in
       # ./_hyprland.nix
       # ./_waybar.nix
       # ./_hyprlock.nix
+      # flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-gnome
       flakeConfig.flake.modules.homeManager.feature-browser
       flakeConfig.flake.modules.homeManager.feature-terminal
-      flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-defaultapps
       flakeConfig.flake.modules.homeManager.feature-keychords
       flakeConfig.flake.modules.homeManager.feature-niri

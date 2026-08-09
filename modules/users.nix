@@ -25,10 +25,10 @@
       config.flake.modules.homeManager.feature-kmonad-miryoku
 
       ({ ... }: {
-        wayland.windowManager.hyprland.settings.monitor = [
-          "DP-1,  3440x1440@60, auto, 1"
-          "eDP-1, 1920x1080@60, auto, 1, mirror, DP-1"
-        ];
+        # wayland.windowManager.hyprland.settings.monitor = [
+        #   "DP-1,  3440x1440@60, auto, 1"
+        #   "eDP-1, 1920x1080@60, auto, 1, mirror, DP-1"
+        # ];
         # programs.waybar.settings.mainBar."battery".bat = "BAT0";
         home.stateVersion = "25.11";
       })
@@ -109,7 +109,7 @@
       config.flake.modules.homeManager.feature-emulation
 
       ({ ... }: {
-        wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 800x1280@60, auto, 1, transform, 3" ];
+        # wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 800x1280@60, auto, 1, transform, 3" ];
         home.stateVersion = "25.11";
       })
 
@@ -207,7 +207,7 @@
           ];
         };
         programs.neovim.enable = false;
-        wayland.windowManager.hyprland.settings.input.kb_layout = "de";
+        # wayland.windowManager.hyprland.settings.input.kb_layout = "de";
       })
 
     ];
