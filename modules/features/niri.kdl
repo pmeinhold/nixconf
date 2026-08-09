@@ -29,13 +29,14 @@ input {
 
 // Outputs
 output "eDP-1" {
-    mode "1920x1080@60"
+    // mode "1920x1080@60"
+    mode "2560x1440@60"
     scale 1
     transform "normal"
 }
 output "DP-1" {
     mode "1360x768@60"
-    position x=0 y=1080
+    position x=0 y=1440
 }
 
 layout {
@@ -62,10 +63,14 @@ layout {
     // Use border (always visible) rather than focus-ring (active only),
     // matching hyprland where all windows have a visible border.
     focus-ring {
-        off
+        on
+        width 2
+        active-gradient   from="#a6e3a1ee" to="#89dcebee" angle=45
+        inactive-color "#313244"
     }
 
     border {
+        off
         width 2
         // Active: green → teal gradient (matches hyprland active_border)
         active-gradient   from="#a6e3a1ee" to="#89dcebee" angle=45
