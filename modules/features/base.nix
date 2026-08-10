@@ -25,6 +25,7 @@ in
         shell = pkgs.fish;
         openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4vpPLYf+6rzvDomLju8J+X7oOKxGNhN2C41sUx0b90 default" ];
         extraGroups = [
+          "input"
           "wheel"
           "networkmanager"
         ];
