@@ -37,20 +37,4 @@
 
     ];
   };
-
-  flake.homeConfigurations."paulm@x220" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-    modules = [
-      config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
-      config.flake.modules.homeManager.feature-kmonad-miryoku
-
-      ({ ... }: {
-        feature.kmonad.miryoku.thumbRow = "lalt spc tab ralt cmp del";
-        home.stateVersion = "25.11";
-      })
-
-    ];
-  };
 }

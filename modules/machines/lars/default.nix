@@ -35,26 +35,4 @@
 
     ];
   };
-
-  flake.homeConfigurations."paulm@lars" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-    modules = [
-      config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
-      config.flake.modules.homeManager.feature-emulation
-
-      ({ pkgs, ... }: {
-        programs.retroarch.settings = {
-          video_driver = "glcore"; # vulkan, glcore, gl, gl1, sdl
-        };
-        home.packages = with pkgs; [
-          prismlauncher # minecraft
-          discord
-        ];
-        home.stateVersion = "25.11";
-      })
-
-    ];
-  };
 }

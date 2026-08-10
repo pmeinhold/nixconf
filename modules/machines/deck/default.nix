@@ -60,19 +60,4 @@ in
       })
     ];
   };
-
-  flake.homeConfigurations."paulm@deck" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
-    modules = [
-      config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
-      config.flake.modules.homeManager.feature-emulation
-
-      ({ ... }: {
-        home.stateVersion = "25.11";
-      })
-    ];
-  };
-
 }
