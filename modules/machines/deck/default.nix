@@ -16,7 +16,7 @@ in
 
         boot.loader.systemd-boot.enable = true;
 
-        programs.gamemode.enable = false;
+        programs.gamemode.enable = true;
 
         services.desktopManager.gnome.enable = true;
         services.displayManager.gdm.enable = false;
