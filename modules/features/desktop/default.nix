@@ -61,7 +61,7 @@ in
     programs = {
       # dconf.enable = true; # For Gnome and GTK managing user preferences
       hyprland = {
-        enable = true;
+        enable = false;
         xwayland.enable = true;
       };
     };
@@ -71,7 +71,6 @@ in
         nautilus
         playerctl
         brightnessctl
-        pwvucontrol
         system-config-printer
         # screenshot requirements
         grim
@@ -85,6 +84,7 @@ in
         # gnupg
         # pinentry-all
         # networkmanagerapplet
+        # pwvucontrol
       ];
       sessionVariables = {
         # If your cursor becomes invisible
@@ -123,9 +123,6 @@ in
     };
 
     home.packages = with pkgs; [
-      pwvucontrol
-      networkmanagerapplet
-      brightnessctl
       spotify
       signal-desktop
       telegram-desktop
