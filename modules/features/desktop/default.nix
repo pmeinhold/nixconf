@@ -68,6 +68,7 @@ in
 
     environment = {
       systemPackages = with pkgs; [
+        foot
         nautilus
         playerctl
         brightnessctl
