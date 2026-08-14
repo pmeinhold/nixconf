@@ -1,5 +1,10 @@
 { ... }:
 {
+  flake.modules.nixos.feature-emulation = { lib, pkgs, ... }:
+  {
+    programs.gamemode.enable = true;
+  };
+
   flake.modules.homeManager.feature-emulation = { lib, pkgs, ... }:
   {
     programs.retroarch = {

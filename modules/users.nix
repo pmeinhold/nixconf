@@ -106,7 +106,9 @@
     modules = [
       config.flake.modules.homeManager.feature-base
       config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
+      config.flake.modules.homeManager.feature-gnome
+      config.flake.modules.homeManager.feature-browser
+      config.flake.modules.homeManager.feature-terminal
       config.flake.modules.homeManager.feature-emulation
 
       ({ ... }: {

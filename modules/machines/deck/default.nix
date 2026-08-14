@@ -8,22 +8,20 @@ in
     modules = [
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
-      # config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-gnome
+      config.flake.modules.nixos.feature-emulation
 
       ({ ... }: {
         networking.hostName = "deck";
 
         boot.loader.systemd-boot.enable = true;
 
-        programs.gamemode.enable = true;
-
         services.desktopManager.gnome.enable = true;
         services.displayManager.gdm.enable = false;
-        # services.displayManager.autoLogin = {
-        #   enable = true;
-        #   user = "paulm";
-        # };
+
+        services.tailscale.extraSetFlags = [
+          "--operator=$USER"
+        ];
 
         services.openssh = {
           enable = true;
@@ -34,15 +32,6 @@ in
             KbdInteractiveAuthentication = false;
           };
         };
-
-        # programs.steam = {
-        #   enable = true;
-        #   remotePlay.openFirewall = false;
-        #   dedicatedServer.openFirewall = false;
-        # };
-
-        # services.displayManager.sddm.wayland.enable = true;
-        # services.displayManager.autoLogin.user = "paulm";
 
         # Use jovian if available
         imports = lib.optional hasJovian inputs.jovian.nixosModules.default;
