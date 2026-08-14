@@ -33,11 +33,13 @@ output "eDP-1" {
     mode "2560x1440@60"
     scale 1.333
     transform "normal"
+    position x=0 y=1080
 }
-// output "DP-1" {
-//     mode "1360x768@60"
-//     position x=0 y=1440
-// }
+output "HDMI-A-2" {
+    mode "1360x768@60"
+    scale 1
+    position x=0 y=0
+}
 
 layout {
     // gaps_in=4, gaps_out=8 from hyprland:
