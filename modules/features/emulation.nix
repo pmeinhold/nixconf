@@ -7,6 +7,8 @@
 
   flake.modules.homeManager.feature-emulation = { lib, pkgs, ... }:
   {
+    # Dolphing savegames are in
+    # /home/paulm/.config/retroarch/saves/dolphin-emu/User/Wii/title
     programs.retroarch = {
       enable = true;
       cores = {
