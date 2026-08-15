@@ -17,6 +17,9 @@
     # Extensions
     environment.systemPackages = with pkgs; [
       gnomeExtensions.tailscale
+      eog
+      showtime
+      nautilus
     ];
 
     # environment.gnome.excludePackages = with pkgs; [

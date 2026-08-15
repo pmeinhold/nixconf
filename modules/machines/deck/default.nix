@@ -23,6 +23,7 @@ in
           enable = true;
           enable32Bit = true;
         };
+        services.udisks2.enable = true;
 
         # get libGL.so.1 into /run/current-system/sw/lib.
         # put the following into steam launch options of non-steam games:

@@ -112,6 +112,7 @@
       config.flake.modules.homeManager.feature-emulation
 
       ({ ... }: {
+        services.udiskie.enable = true;
         home.stateVersion = "25.11";
       })
     ];
