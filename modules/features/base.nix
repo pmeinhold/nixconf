@@ -14,6 +14,12 @@ in
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = lib.mkDefault "en_DK.UTF-8";
 
@@ -89,6 +95,13 @@ in
     ];
 
     nixpkgs.config.allowUnfree = true;
+
+
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
 
     home.username = lib.mkDefault defaultUser;
     home.homeDirectory = lib.mkDefault "/home/${defaultUser}";
