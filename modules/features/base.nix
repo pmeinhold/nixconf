@@ -1,13 +1,14 @@
 { config, inputs, ... }:
 let
   defaultUser = "paulm";
+  flakeConfig = config;
 in
 {
-  flake.modules.nixos.feature-base = { lib, pkgs, ... }:
+  flake.modules.nixos.feature-base = { config, lib, pkgs, ... }:
   {
     imports = [
       inputs.agenix.nixosModules.default
-      config.flake.modules.nixos.feature-theme
+      flakeConfig.flake.modules.nixos.feature-theme
     ];
 
     nixpkgs.config.allowUnfree = true;
@@ -35,6 +36,7 @@ in
     environment = {
       systemPackages = with pkgs; [
         git
+        gnupg
         neovim
         jujutsu
         inputs.agenix.packages.${stdenv.hostPlatform.system}.default
@@ -70,14 +72,6 @@ in
         enable = true;
         useRoutingFeatures = lib.mkDefault "client";
       };
-      # syncthing = {
-      #   enable = true;
-      #   openDefaultPorts = true;
-      #   user = "${defaultUser}";
-      #   dataDir = "/home/${defaultUser}/";
-      #   guiAddress = if hostname == "srvr" then "0.0.0.0:8384" else "127.0.0.1:8384";
-      #   settings.folders."Sync".path = "/home/${defaultUser}/Sync";
-      # };
     };
 
     networking = {
@@ -90,8 +84,8 @@ in
   {
     imports = [
       inputs.agenix.homeManagerModules.default
-      config.flake.modules.homeManager.feature-theme
-      config.flake.modules.homeManager.feature-defaultapps
+      flakeConfig.flake.modules.homeManager.feature-theme
+      flakeConfig.flake.modules.homeManager.feature-defaultapps
     ];
 
     nixpkgs.config.allowUnfree = true;

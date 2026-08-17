@@ -7,6 +7,7 @@
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-kmonad
+      config.flake.modules.nixos.feature-syncthing
 
       ({ config, pkgs, ... }: {
         boot.loader.systemd-boot.enable = true;

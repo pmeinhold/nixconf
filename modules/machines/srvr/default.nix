@@ -14,6 +14,7 @@ in
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-server
+      config.flake.modules.nixos.feature-syncthing
 
       ({ config, lib, pkgs, ... }: {
         networking.hostName = "srvr";
