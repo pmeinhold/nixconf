@@ -1,7 +1,14 @@
 { ... }:
 {
+  flake.modules.nixos.feature-emulation = { lib, pkgs, ... }:
+  {
+    programs.gamemode.enable = true;
+  };
+
   flake.modules.homeManager.feature-emulation = { lib, pkgs, ... }:
   {
+    # Dolphing savegames are in
+    # /home/paulm/.config/retroarch/saves/dolphin-emu/User/Wii/title
     programs.retroarch = {
       enable = true;
       cores = {
@@ -20,7 +27,7 @@
         xmb_theme = "0"; # Icons
       # INPUT
         menu_swap_ok_cancel_buttons = "true";
-        input_driver = "wayland";
+        input_driver = "udev";
         input_joypad_driver = "udev";
       # All input binds have corresponding binds for keyboard (none), joykeys (_btn) and joyaxes (_axis) as well.
         # input_keyboard_layout = "eu";

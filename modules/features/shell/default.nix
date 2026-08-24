@@ -7,7 +7,7 @@
       ./_tmux.nix
       ./_ssh.nix
       ./_editorconfig.nix
-      config.flake.modules.homeManager.feature-opencode
+      # config.flake.modules.homeManager.feature-opencode
     ];
 
     home.packages = with pkgs; [
@@ -16,12 +16,11 @@
       tree
       bitwarden-cli
       geteduroam-cli
-      # for yazi:
-      # poppler
       poppler-utils
     ];
 
     # SHELL
+    programs.claude-code.enable = true;
     programs.fish = {
       enable = true;
       shellAliases = {

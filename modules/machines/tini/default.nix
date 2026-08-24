@@ -29,9 +29,11 @@
 
         services.openssh = {
           enable = true;
+          ports = [ 69 ];
           settings = {
             PermitRootLogin = "no";
             PasswordAuthentication = true;
+            KbdInteractiveAuthentication = false;
           };
         };
 

@@ -13,10 +13,6 @@ in
 
     services = {
       displayManager.gdm.enable = lib.mkDefault true;
-      # displayManager.sddm = {
-      #   enable = lib.mkDefault true;
-      #   wayland.enable = lib.mkDefault true;
-      # };
 
       blueman.enable = true;
       udisks2.enable = true;
@@ -59,58 +55,33 @@ in
     };
 
     programs = {
-      dconf.enable = true; # For Gnome and GTK managing user preferences
+      # dconf.enable = true; # For Gnome and GTK managing user preferences
       hyprland = {
-        enable = true;
+        enable = false;
         xwayland.enable = true;
       };
     };
 
     environment = {
-      gnome.excludePackages = (with pkgs; [
-        cheese
-        gedit
-        yelp
-        epiphany
-        geary
-        evince
-        totem
-        baobab
-        seahorse
-        snapshot
-        gnome-tour
-        gnome-connections
-        gnome-photos
-        gnome-online-accounts
-        gnome-system-monitor
-        gnome-maps
-        gnome-music
-        gnome-weather
-      ]);
       systemPackages = with pkgs; [
-        # desktop requirements
-        dunst
-        libnotify
-        awww
-        waybar
-        cbatticon
-        gnupg
-        pinentry-all
-        networkmanagerapplet
+        foot
         nautilus
         playerctl
         brightnessctl
-        pwvucontrol
         system-config-printer
         # screenshot requirements
         grim
         slurp
         wl-clipboard
-        # openvpn
-        # networkmanager-openvpn
-        # podman
-        # podman-tui
-        # podman-compose
+        # dunst
+        # libnotify
+        # awww
+        # waybar
+        # cbatticon
+        # gnupg
+        # pinentry-all
+        # networkmanagerapplet
+        # pwvucontrol
       ];
       sessionVariables = {
         # If your cursor becomes invisible
@@ -123,12 +94,13 @@ in
 
   flake.modules.homeManager.feature-desktop = { config, lib, pkgs, ... }: {
     imports = [
-      ./_hyprland.nix
-      ./_hyprlock.nix
-      ./_waybar.nix
+      # ./_hyprland.nix
+      # ./_waybar.nix
+      # ./_hyprlock.nix
+      # flakeConfig.flake.modules.homeManager.feature-launcher
+      flakeConfig.flake.modules.homeManager.feature-gnome
       flakeConfig.flake.modules.homeManager.feature-browser
       flakeConfig.flake.modules.homeManager.feature-terminal
-      flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-defaultapps
       flakeConfig.flake.modules.homeManager.feature-keychords
       flakeConfig.flake.modules.homeManager.feature-niri
@@ -148,9 +120,6 @@ in
     };
 
     home.packages = with pkgs; [
-      pwvucontrol
-      networkmanagerapplet
-      brightnessctl
       spotify
       signal-desktop
       telegram-desktop

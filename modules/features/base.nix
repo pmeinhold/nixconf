@@ -1,17 +1,24 @@
 { config, inputs, ... }:
 let
   defaultUser = "paulm";
+  flakeConfig = config;
 in
 {
-  flake.modules.nixos.feature-base = { lib, pkgs, ... }:
+  flake.modules.nixos.feature-base = { config, lib, pkgs, ... }:
   {
     imports = [
       inputs.agenix.nixosModules.default
-      config.flake.modules.nixos.feature-theme
+      flakeConfig.flake.modules.nixos.feature-theme
     ];
 
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
 
     time.timeZone = "Europe/Berlin";
     i18n.defaultLocale = lib.mkDefault "en_DK.UTF-8";
@@ -25,6 +32,7 @@ in
         shell = pkgs.fish;
         openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4vpPLYf+6rzvDomLju8J+X7oOKxGNhN2C41sUx0b90 default" ];
         extraGroups = [
+          "input"
           "wheel"
           "networkmanager"
         ];
@@ -34,6 +42,7 @@ in
     environment = {
       systemPackages = with pkgs; [
         git
+        gnupg
         neovim
         jujutsu
         inputs.agenix.packages.${stdenv.hostPlatform.system}.default
@@ -69,14 +78,6 @@ in
         enable = true;
         useRoutingFeatures = lib.mkDefault "client";
       };
-      # syncthing = {
-      #   enable = true;
-      #   openDefaultPorts = true;
-      #   user = "${defaultUser}";
-      #   dataDir = "/home/${defaultUser}/";
-      #   guiAddress = if hostname == "srvr" then "0.0.0.0:8384" else "127.0.0.1:8384";
-      #   settings.folders."Sync".path = "/home/${defaultUser}/Sync";
-      # };
     };
 
     networking = {
@@ -89,11 +90,18 @@ in
   {
     imports = [
       inputs.agenix.homeManagerModules.default
-      config.flake.modules.homeManager.feature-theme
-      config.flake.modules.homeManager.feature-defaultapps
+      flakeConfig.flake.modules.homeManager.feature-theme
+      flakeConfig.flake.modules.homeManager.feature-defaultapps
     ];
 
     nixpkgs.config.allowUnfree = true;
+
+
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
 
     home.username = lib.mkDefault defaultUser;
     home.homeDirectory = lib.mkDefault "/home/${defaultUser}";

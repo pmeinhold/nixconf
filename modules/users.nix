@@ -1,5 +1,24 @@
 { config, inputs, ... }:
 {
+  flake.homeConfigurations."paulm@t480" = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      config.flake.modules.homeManager.feature-base
+      config.flake.modules.homeManager.feature-shell
+      config.flake.modules.homeManager.feature-desktop
+      config.flake.modules.homeManager.feature-kmonad-miryoku
+
+      ({ ... }: {
+        # wayland.windowManager.hyprland.settings.monitor = [
+        #   "DP-1,  3440x1440@60, auto, 1"
+        #   "eDP-1, 1920x1080@60, auto, 1, mirror, DP-1"
+        # ];
+        # programs.waybar.settings.mainBar."battery".bat = "BAT0";
+        home.stateVersion = "25.11";
+      })
+    ];
+  };
+
   flake.homeConfigurations."paulm@x220" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
@@ -16,33 +35,16 @@
     ];
   };
 
-  flake.homeConfigurations."paulm@t480" = inputs.home-manager.lib.homeManagerConfiguration {
+  flake.homeConfigurations."paulm@tini" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
       config.flake.modules.homeManager.feature-base
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-desktop
-      config.flake.modules.homeManager.feature-kmonad-miryoku
+      config.flake.modules.homeManager.feature-emulation
 
-      ({ ... }: {
-        wayland.windowManager.hyprland.settings.monitor = [
-          "DP-1,  3440x1440@60, auto, 1"
-          "eDP-1, 1920x1080@60, auto, 1, mirror, DP-1"
-        ];
-        # programs.waybar.settings.mainBar."battery".bat = "BAT0";
-        home.stateVersion = "25.11";
-      })
-
-    ];
-  };
-
-  flake.homeConfigurations."paulm@srvr" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-    modules = [
-      config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
-
-      ({ ... }: {
+      ({ pkgs, ... }: {
+        programs.retroarch.settings.video_driver = "glcore"; # vulkan, glcore, gl, gl1, sdl
         home.stateVersion = "25.11";
       })
 
@@ -61,6 +63,21 @@
 
     ];
   };
+
+
+  flake.homeConfigurations."paulm@srvr" = inputs.home-manager.lib.homeManagerConfiguration {
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+    modules = [
+      config.flake.modules.homeManager.feature-base
+      config.flake.modules.homeManager.feature-shell
+
+      ({ ... }: {
+        home.stateVersion = "25.11";
+      })
+
+    ];
+  };
+
 
   flake.homeConfigurations."paulm@lars" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
@@ -84,35 +101,20 @@
     ];
   };
 
-  flake.homeConfigurations."paulm@tini" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-    modules = [
-      config.flake.modules.homeManager.feature-base
-      config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
-      config.flake.modules.homeManager.feature-emulation
-
-      ({ pkgs, ... }: {
-        programs.retroarch.settings.video_driver = "glcore"; # vulkan, glcore, gl, gl1, sdl
-        home.stateVersion = "25.11";
-      })
-
-    ];
-  };
-
   flake.homeConfigurations."paulm@deck" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     modules = [
       config.flake.modules.homeManager.feature-base
       config.flake.modules.homeManager.feature-shell
-      config.flake.modules.homeManager.feature-desktop
+      config.flake.modules.homeManager.feature-gnome
+      config.flake.modules.homeManager.feature-browser
+      config.flake.modules.homeManager.feature-terminal
       config.flake.modules.homeManager.feature-emulation
 
       ({ ... }: {
-        wayland.windowManager.hyprland.settings.monitor = [ "eDP-1, 800x1280@60, auto, 1, transform, 3" ];
+        services.udiskie.enable = true;
         home.stateVersion = "25.11";
       })
-
     ];
   };
 
@@ -207,7 +209,7 @@
           ];
         };
         programs.neovim.enable = false;
-        wayland.windowManager.hyprland.settings.input.kb_layout = "de";
+        # wayland.windowManager.hyprland.settings.input.kb_layout = "de";
       })
 
     ];
