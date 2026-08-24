@@ -25,11 +25,15 @@ in
         gui.user = "${defaultUser}";
         devices = {
           "zenfone" = { id = "YGHKFE7-CKPD3XY-EJQJWSJ-7VA6N35-2LENZ7H-PE2CEBR-WFFXDQN-KIBVPQ2"; };
+          "lars" = { id = "EMHP2R4-RO4333P-6YQQGZD-ZRWJTXM-NCA3B5G-WQ3OZD6-LMSDQAW-BKFVJAC"; };
         };
         folders."Sync" = {
           path = "/home/${defaultUser}/Sync";
           devices = [
             "zenfone"
+            "lars"
+            # "t480"
+            # "srvr"
           ];
         };
       };

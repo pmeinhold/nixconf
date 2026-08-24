@@ -52,10 +52,12 @@
           cmd: firefox
         - key: "r"
           desc: 󱓞  Launcher
-          cmd: rofi -show drun
+          cmd: noctalia msg panel-toggle launcher
+          # cmd: rofi -show drun
         - key: "p"
           desc: 󰹑  Screenshot
-          cmd: ${home}/.config/keychords/screenshot.sh
+          cmd: noctalia msg screenshot-region
+          # cmd: ${home}/.config/keychords/screenshot.sh
         - key: "l"
           desc: 󰍁  Lock
           cmd: hyprlock

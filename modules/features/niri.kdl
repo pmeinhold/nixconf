@@ -220,20 +220,34 @@ binds {
     // Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
 
     // ── Media & brightness ────────────────────────────────────────────────
-    XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5"; }
-    XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
-    XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    // XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5"; }
+    // XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
+    // XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86AudioPlay  allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioPause allow-when-locked=true { spawn "playerctl" "play-pause"; }
     XF86AudioStop  allow-when-locked=true { spawn "playerctl" "stop"; }
     XF86AudioPrev  allow-when-locked=true { spawn "playerctl" "previous"; }
     XF86AudioNext  allow-when-locked=true { spawn "playerctl" "next"; }
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
+    // XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
+    // XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
     // Mod+audio keys → brightness (matches hyprland Mod+XF86Audio* binding).
-    Mod+XF86AudioRaiseVolume { spawn "brightnessctl" "set" "+5%"; }
-    Mod+XF86AudioLowerVolume { spawn "brightnessctl" "set" "5%-"; }
+    // Mod+XF86AudioRaiseVolume { spawn "brightnessctl" "set" "+5%"; }
+    // Mod+XF86AudioLowerVolume { spawn "brightnessctl" "set" "5%-"; }
+    // XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+
+    // Core Noctalia binds
+    // Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+    // Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    // Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+    Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
+    // Niri has a built-in window switcher you might want to try it to see which one you prefer.
+
+    // Audio & Brightness
+    XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+    XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
 
     // DEAD ZONE
 

@@ -7,6 +7,7 @@
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-podman
+      config.flake.modules.nixos.feature-syncthing
       # config.flake.modules.nixos.feature-libvirt
 
       ({ ... }: {
