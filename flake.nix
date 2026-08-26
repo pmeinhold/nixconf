@@ -24,6 +24,9 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     firefox-addons.inputs.nixpkgs.follows = "nixpkgs";
 
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
     jovian.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };

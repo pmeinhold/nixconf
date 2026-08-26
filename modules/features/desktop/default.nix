@@ -9,6 +9,7 @@ in
     imports = [
       config.flake.modules.nixos.feature-niri
       config.flake.modules.nixos.feature-noctalia
+      config.flake.modules.nixos.feature-zen-browser
     ];
 
     services = {
