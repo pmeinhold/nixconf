@@ -45,6 +45,7 @@ in
         };
       };
     };
+    # rtkit (optional, recommended) allows Pipewire to use the realtime scheduler for increased performance.
     security.rtkit.enable = true;
 
     hardware = {
@@ -67,6 +68,7 @@ in
       systemPackages = with pkgs; [
         foot
         nautilus
+        pwvucontrol
         playerctl
         brightnessctl
         system-config-printer
@@ -82,7 +84,6 @@ in
         # gnupg
         # pinentry-all
         # networkmanagerapplet
-        # pwvucontrol
       ];
       sessionVariables = {
         # If your cursor becomes invisible
