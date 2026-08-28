@@ -45,7 +45,6 @@ in
         gnupg
         neovim
         jujutsu
-        bitwarden-cli
         inputs.agenix.packages.${stdenv.hostPlatform.system}.default
       ];
       variables.EDITOR = "nvim";
