@@ -132,7 +132,7 @@ window-rule {
 // }
 window-rule {
     match app-id="firefox" title="^Picture-in-Picture$" //regex: ^: start of string, $: end of string, any substring match otherwise
-    match app-id="firefox" title=r#"Extension"#
+    match app-id="firefox" title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$" // Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox
     open-floating true
 }
 
