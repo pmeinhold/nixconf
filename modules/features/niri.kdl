@@ -132,7 +132,16 @@ window-rule {
 // }
 window-rule {
     match app-id="firefox" title="^Picture-in-Picture$" //regex: ^: start of string, $: end of string, any substring match otherwise
-    match app-id="firefox" title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$" // Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox
+    // The Bitwarden popup CANNOT be matched here. open-floating is evaluated once, when the
+    // window is mapped, and Firefox maps extension popups with the title "Mozilla Firefox",
+    // only setting the real title afterwards. Matching "^Mozilla Firefox$" is not an option
+    // either -- every new Firefox window briefly carries that same title.
+    // Handled instead by the niri-auto-float service in niri.nix.
+    // (Two earlier attempts, both dead ends: the first never matched because the parens are a
+    // regex group rather than literals; the second fixed that with character classes -- KDL v2
+    // rejects "\(" as an invalid escape -- but still lost to the title timing above.)
+    // match app-id="firefox" title="^Extension: (Bitwarden Password Manager) - Bitwarden — Mozilla Firefox$"
+    // match app-id="firefox" title="^Extension: [(]Bitwarden Password Manager[)] - Bitwarden"
     open-floating true
 }
 
