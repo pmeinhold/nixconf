@@ -44,12 +44,12 @@ output "HDMI-A-2" {
 layout {
     // gaps_in=4, gaps_out=8 from hyprland:
     // niri's gap applies to all sides; struts add outer margin on top of gaps.
-    gaps 4
+    gaps 8
     struts {
-        left   4
-        right  4
-        top    4
-        bottom 4
+        left   0
+        right  0
+        top    0
+        bottom 0
     }
 
     center-focused-column "never"
@@ -121,10 +121,10 @@ window-rule {
     match app-id="org.pwmt.zathura"
     default-column-width { fixed 890; }
 }
-window-rule {
-    match app-id="foot"
-    default-column-width { proportion 0.66; }
-}
+// window-rule {
+//     match app-id="foot"
+//     default-column-width { proportion 0.66; }
+// }
 
 // Firefox picture-in-picture, etc. floats.
 // window-rule {
