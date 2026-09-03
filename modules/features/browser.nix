@@ -5,6 +5,8 @@ in
 {
   flake.modules.homeManager.feature-browser = { config, lib, pkgs, ... }:
   {
+    home.packages = with pkgs; [ tor-browser ];
+
     programs.chromium = {
       enable = true;
       extensions = [
