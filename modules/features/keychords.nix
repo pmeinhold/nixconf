@@ -6,31 +6,34 @@
       if      config.programs.foot.enable      then "foot"
       else if config.programs.alacritty.enable then "alacritty"
       else if config.programs.wezterm.enable   then "wezterm"
-      else "notify-send 'No terminal configured'";
+      else "noctalia msg notification-show 'No terminal configured'";
+      # else "notify-send 'No terminal configured'";
 
     home = config.home.homeDirectory;
   in
   {
     home.packages = [ pkgs.wlr-which-key ];
 
-    home.file."keychords-screenshot" = {
-      executable = true;
-      target = ".config/keychords/screenshot.sh";
-      text = ''
-        #!/bin/sh
-        grim -g "$(slurp)" "$HOME/Desktop/$(date +'%F_%T.png')"
-      '';
-    };
+    #home.file."keychords-screenshot" = {
+    #  executable = true;
+    #  target = ".config/keychords/screenshot.sh";
+    #  text = ''
+    #    #!/bin/sh
+    #    grim -g "$(slurp)" "$HOME/Desktop/$(date +'%F_%T.png')"
+    #  '';
+    #};
 
-    home.file."keychords-logout" = {
-      executable = true;
-      target = ".config/keychords/logout.sh";
-      text = ''
-        #!/bin/sh
-        loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
-      '';
-    };
+    #home.file."keychords-logout" = {
+    #  executable = true;
+    #  target = ".config/keychords/logout.sh";
+    #  text = ''
+    #    #!/bin/sh
+    #    loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
+    #  '';
+    #};
 
+
+    # noctalia msg session <lock|suspend|lock-and-suspend|logout|reboot|shutdown>
     xdg.configFile."wlr-which-key/config.yaml".text = ''
       font: "Inconsolata Nerd Font 14"
       background: "#1e1e2ed0"
@@ -53,15 +56,12 @@
         - key: "r"
           desc: 󱓞  Launcher
           cmd: noctalia msg panel-toggle launcher
-          # cmd: rofi -show drun
         - key: "p"
           desc: 󰹑  Screenshot
           cmd: noctalia msg screenshot-region
-          # cmd: ${home}/.config/keychords/screenshot.sh
         - key: "l"
           desc: 󰍁  Lock
           cmd: noctalia msg session lock
-          # cmd: hyprlock
         - key: "s"
           desc: System
           submenu:
@@ -73,8 +73,12 @@
               cmd: systemctl reboot
             - key: "l"
               desc: 󰿅  Logout
-              cmd: ${home}/.config/keychords/logout.sh
+              cmd: noctalia msg session logout
     '';
+    # cmd: rofi -show drun
+    # cmd: hyprlock
+    # cmd: ${home}/.config/keychords/screenshot.sh
+        # cmd: ${home}/.config/keychords/logout.sh
     # 
   };
 }
