@@ -94,6 +94,7 @@
         home.packages = with pkgs; [
           prismlauncher # minecraft
           discord
+          libreoffice
         ];
         home.stateVersion = "25.11";
       })

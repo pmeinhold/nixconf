@@ -60,7 +60,8 @@
           # cmd: ${home}/.config/keychords/screenshot.sh
         - key: "l"
           desc: 󰍁  Lock
-          cmd: hyprlock
+          cmd: noctalia msg session lock
+          # cmd: hyprlock
         - key: "s"
           desc: System
           submenu:
