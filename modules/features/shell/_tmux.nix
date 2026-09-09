@@ -15,6 +15,11 @@
 {
   programs.sesh = {
     enable = true;
+    settings = {
+      "Downloads" = {
+        startup_command = "yazi";
+      };
+    };
   };
 
   programs.fzf = {
@@ -40,6 +45,7 @@
       set-option -g status-position top
 
       # Windows/Tabs
+      bind-key Enter new-window
       bind-key -n M-S-Enter new-window
       bind-key -n M-l next-window
       bind-key -n M-h previous-window
@@ -49,7 +55,7 @@
       bind-key -n M-: command-prompt
 
       # Catppuccin
-      set -g @catppuccin_window_status_style "basic" #"rounded"
+      # set -g @catppuccin_window_status_style "rounded" #"basic"
       set -g status-right-length 100
       set -g status-left-length 100
       set -g status-left ""

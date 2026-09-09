@@ -39,6 +39,9 @@
     programs.zoxide = {
       enable = true;
       enableFishIntegration = true;
+      options = [
+        "--cmd cd" # 'cd' is zoxide now
+      ];
     };
     programs.direnv = {
       enable = true;
