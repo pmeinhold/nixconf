@@ -13,6 +13,15 @@
 # - Copy/Paste to/from the system that zellij runs on
 
 {
+  programs.sesh = {
+    enable = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    tmux.enableShellIntegration = true;
+  };
+
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -20,10 +29,10 @@
     prefix = "M-Space";
     plugins = with pkgs.tmuxPlugins; [
       sensible
-      {
-        plugin = tmux-sessionx;
-        extraConfig = "set -g @sessionx-bind 'f'";
-      }
+      # {
+      #   plugin = tmux-sessionx;
+      #   extraConfig = "set -g @sessionx-bind 'f'";
+      # }
     ];
     extraConfig = #bash
     ''
