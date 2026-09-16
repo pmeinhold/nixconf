@@ -18,11 +18,6 @@
       inputs.noctalia.homeModules.default
     ];
 
-    # programs.noctalia-shell = {
-    #   enable = true;
-    #   settings = {};
-    #     # (builtins.fromJSON (builtins.readFile ./noctalia.json)).settings;
-    # };
     programs.noctalia = {
       enable = true;
       # This may also be a string or path to a .toml file.
