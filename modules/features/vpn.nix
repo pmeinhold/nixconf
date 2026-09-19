@@ -5,7 +5,7 @@
 
     environment.systemPackages = with pkgs; [
       nordvpn
-      qbittorrent
+      # qbittorrent
     ];
   };
 }

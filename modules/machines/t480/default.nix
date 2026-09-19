@@ -1,6 +1,6 @@
 { lib, config, inputs, ... }:
 {
-  flake.nixosConfigurations.t480 = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.t480 = inputs.nixpkgs-unstable.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       ./_hardware.nix
@@ -8,6 +8,7 @@
       config.flake.modules.nixos.feature-desktop
       config.flake.modules.nixos.feature-kmonad
       config.flake.modules.nixos.feature-syncthing
+      config.flake.modules.nixos.feature-vpn
 
       ({ config, pkgs, ... }: {
         boot.loader.systemd-boot.enable = true;
