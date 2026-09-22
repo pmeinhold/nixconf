@@ -1,12 +1,14 @@
 { lib, config, inputs, ... }:
 let
+  flakeConfig = config;
   domain = "pmeinhold.duckdns.org";
 in
 {
   flake.nixosConfigurations.vps0 = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      config.flake.modules.nixos.feature-base
+      flakeConfig.flake.modules.nixos.feature-base
+      flakeConfig.flake.modules.nixos.feature-podman
 
       ({ config, lib, pkgs, ... }: {
         networking.hostName = "vps0";
@@ -39,6 +41,29 @@ in
           ];
         };
 
+        age.secrets.obsidian_remote_password = {
+          file = ../../secrets/obsidian_remote_password.age;
+        };
+
+        virtualisation.oci-containers.backend = "podman";
+        virtualisation.oci-containers.containers.obsidian-remote = {
+          image = "ghcr.io/sytone/obsidian-remote:latest";
+          ports = [ "127.0.0.1:8080:8080" ];
+          volumes = [
+            "/var/lib/obsidian-remote/vaults:/vaults"
+            "/var/lib/obsidian-remote/config:/config"
+          ];
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+            TZ = "Europe/Berlin";
+            KEYBOARD = "de-de-qwertz";
+            SUBFOLDER = "/obsidian/";
+            # CUSTOM_USER = "paulm";
+          };
+          # environmentFiles = [ config.age.secrets.obsidian_remote_password.path ];
+        };
+
         services = {
           caddy = {
             enable = true;
@@ -48,6 +73,15 @@ in
             virtualHosts.${domain}.extraConfig = ''
               root * /var/www/pmeinhold
               file_server
+
+              handle /obsidian/* {
+                reverse_proxy 127.0.0.1:8080
+              }
+
+              basic_auth /obsidian/* {
+                # Username "julian", password "hiccup"
+                julian $2a$14$KFyL/K6VBke79uxL5QqCaet87Hd/3KVtmAP4ev./hQ0MS5ZFVjL.2
+              }
             '';
           };
           openssh = {
