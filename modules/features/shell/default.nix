@@ -7,7 +7,7 @@
       ./_tmux.nix
       ./_ssh.nix
       ./_editorconfig.nix
-      # config.flake.modules.homeManager.feature-opencode
+      config.flake.modules.homeManager.feature-opencode
     ];
 
     home.packages = with pkgs; [

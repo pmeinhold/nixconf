@@ -3,7 +3,7 @@
   flake.modules.homeManager.feature-opencode = { lib, pkgs, ... }:
   {
     programs.opencode = {
-      enable = false;
+      enable = true;
       settings = {
         provider = {
           zib = {

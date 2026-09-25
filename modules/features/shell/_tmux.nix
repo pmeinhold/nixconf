@@ -31,7 +31,8 @@
     enable = true;
     mouse = true;
     terminal = "tmux-256color";
-    prefix = "M-Space";
+    # prefix = "M-Space";
+    prefix = "M-Enter";
     plugins = with pkgs.tmuxPlugins; [
       sensible
       # {
