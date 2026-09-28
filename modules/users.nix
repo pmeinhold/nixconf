@@ -86,6 +86,7 @@
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-desktop
       config.flake.modules.homeManager.feature-emulation
+      config.flake.modules.homeManager.feature-papis
 
       ({ pkgs, ... }: {
         programs.retroarch.settings = {
