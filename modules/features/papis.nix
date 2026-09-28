@@ -3,7 +3,7 @@
   # A Guide on How to Use papis Sensibly
   # https://gist.github.com/avonmoll/e435f0e478fbdc6c1eee7557b221a7e2
 
-  flake.modules.homeManager.feature-papis = { pkgs, ... }:
+  flake.modules.homeManager.feature-papis = { config, pkgs, ... }:
   {
     programs.papis = {
       # 'packaging' is a dependency of 'habanero' is a dependency of papis.
@@ -48,5 +48,32 @@
         add-file-name = "{doc[author_list][0][family]} - {doc[title]}";
       };
     };
+
+    # Neovim Plugin & the 'yq-go' dependency, which is missing from the nix package
+    # home.packages = with pkgs; [ yq-go ];
+    # programs.neovim.plugins = [{
+    #   plugin = pkgs.vimPlugins.papis-nvim;
+    #   type = "lua";
+    #   config = #lua
+    #   ''
+    #     require("papis").setup({
+    #       -- Enable the default keymaps (defaults to `false`)
+    #       enable_keymaps = true,
+
+    #       -- You might want to change the filetypes activating papis.nvim
+    #       -- init_filetypes = { "markdown", "norg", "yaml", "typst" },
+
+    #       -- If you don't have an appropriate font (like Nerd Font), you
+    #       -- may want to disable icons. This may require a `:Papis reload data`.
+    #       -- to take effect.
+    #       -- enable_icons = false,
+
+    #       -- You can enable disabled modules (e.g. the 'ask' module) like so:
+    #       -- ["ask"] = {
+    #       --   enable = true,
+    #       -- },
+    #     })
+    #   '';
+    # }];
   };
 }
