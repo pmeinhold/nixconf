@@ -3,7 +3,7 @@
   # A Guide on How to Use papis Sensibly
   # https://gist.github.com/avonmoll/e435f0e478fbdc6c1eee7557b221a7e2
 
-  flake.modules.homeManager.feature-papis = { config, pkgs, ... }:
+  flake.modules.homeManager.feature-papis = { pkgs, ... }:
   {
     programs.papis = {
       # 'packaging' is a dependency of 'habanero' is a dependency of papis.
