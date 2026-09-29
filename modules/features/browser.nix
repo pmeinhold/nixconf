@@ -5,10 +5,13 @@ in
 {
   flake.modules.homeManager.feature-browser = { config, lib, pkgs, ... }:
   {
-    home.packages = with pkgs; [ tor-browser ];
+    home.packages = with pkgs; [
+      brave
+      # tor-browser
+    ];
 
     programs.chromium = {
-      enable = true;
+      enable = false;
       extensions = [
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
         { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
