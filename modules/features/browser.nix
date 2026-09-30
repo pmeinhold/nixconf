@@ -5,19 +5,8 @@ in
 {
   flake.modules.homeManager.feature-browser = { config, lib, pkgs, ... }:
   {
-    home.packages = with pkgs; [
-      brave
-      # tor-browser
-    ];
-
-    programs.chromium = {
-      enable = false;
-      extensions = [
-        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
-        { id = "nngceckbapebfimnlniiiahkandclblb"; } # Bitwarden
-        { id = "dbepggeogbaibhgnhhndojpepiihcmeb"; } # Vimium
-      ];
-    };
+    # config.flake.modules.homeManager.feature-vimium
+    home.packages = with pkgs; [ brave ];
 
     xdg.mimeApps.defaultApplications = {
       "text/html" = lib.mkDefault "firefox.desktop";
@@ -28,89 +17,136 @@ in
       "x-scheme-handler/unknown" = lib.mkDefault "firefox.desktop";
     };
 
-    home.file.".config/vimium-options.json" = {
-      text = builtins.toJSON {
-        keyMappings = ''
-          # Insert your preferred key mappings here.
+    # https://wiki.nixos.org/wiki/Firefox#Configuration
+    # https://firefox-admin-docs.mozilla.org/reference/policies/preferences/
+    programs.firefox = {
+      enable = true;
 
-          unmapAll
-          map <a-h> previousTab
-          map <a-l> nextTab
-          map <a-L> moveTabRight
-          map <a-H> moveTabLeft
-          map <a-u> restoreTab
-          map <a-f> LinkHints.activateMode
-          map <a-F> LinkHints.activateModeToOpenInNewTab
-          map <a-r> reload
-          map gg scrollToTop
-          map G scrollToBottom
-          map j scrollDown
-          map k scrollUp
-          map h scrollLeft
-          map l scrollRight
-          map <a-c-u> scrollPageUp
-          map <a-c-d> scrollPageDown
-          map yy copyCurrentUrl
-          map H goBack
-          map L goForward
-        '';
+      languagePacks = [ "en-US" ];
 
-        searchEngines = ''
-          # w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia
+      configPath = ".mozilla/firefox";
 
-          # More examples.
-          #
-          # (Vimium supports search completion Wikipedia, as
-          # above, and for these.)
-          # d: https://duckduckgo.com/?q=%s DuckDuckGo
-        '';
+      policies = {
+        # Updates & Background Services
+        AppAutoUpdate                 = false;
+        BackgroundAppUpdate           = false;
 
-        settingsVersion = "2.3.1";
-        exclusionRules = [];
+        # Feature Disabling
+        DisableBuiltinPDFViewer       = false;
+        DisableFirefoxStudies         = true;
+        DisableFirefoxAccounts        = true;
+        DisableFirefoxScreenshots     = true;
+        DisableForgetButton           = true;
+        DisableMasterPasswordCreation = true;
+        DisableProfileImport          = true;
+        DisableProfileRefresh         = true;
+        DisableSetDesktopBackground   = true;
+        DisablePocket                 = true;
+        DisableTelemetry              = true;
+        DisableFormHistory            = true;
+        DisablePasswordReveal         = true;
+
+        # Access Restrictions
+        BlockAboutConfig              = false;
+        BlockAboutProfiles            = true;
+        BlockAboutSupport             = true;
+
+        # UI and Behavior
+        DisplayMenuBar                = "never";
+        DontCheckDefaultBrowser       = true;
+        HardwareAcceleration          = true;
+        OfferToSaveLogins             = false;
+        DefaultDownloadDirectory      = "$HOME/Downloads";
+        HttpsOnlyMode                 = true;
+        EnableTrackingProtection      = true;
+        FirefoxHome = {
+          Search            = false;
+          TopSites          = true;
+          SponsoredTopSites = false;
+          Highlights        = false;
+          Pocket            = false;
+          Stories           = false;
+          SponsoredPocket   = false;
+          SponsoredStories  = false;
+          Snippets          = false;
+          Widgets.Enabled   = false;
+          Locked            = true;
+        };
+        AIControls = {
+          Default = {
+            Value = "blocked";
+            Locked = true;
+          };
+          Translations = {
+            Value = "available";
+            Locked = true;
+          };
+        };
+        GenerativeAI = {
+          Enabled = false;
+          Locked = true;
+        };
+
+        ExtensionSettings =
+        let
+          # for the short names go to addons.mozilla.org, search the extension, click it,
+          # and copy whatever sits between /addon/ and the trailing slash.
+          moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+        in
+        {
+          "*".installation_mode = "blocked";
+
+          "uBlock0@raymondhill.net" = {
+            install_url       = moz "ublock-origin";
+            installation_mode = "force_installed";
+            default_area      = "navbar";
+            updates_disabled  = true;
+            private_browsing  = true;
+          };
+
+          "nordvpnproxy@nordvpn.com" = {
+            install_url       = moz "nordvpn-proxy-extension";
+            installation_mode = "force_installed";
+            default_area      = "navbar";
+            updates_disabled  = true;
+            private_browsing  = true;
+          };
+
+          # Bitwarden Password Manager
+          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+            install_url       = moz "bitwarden-password-manager";
+            installation_mode = "force_installed";
+            default_area      = "navbar";
+            updates_disabled  = true;
+            private_browsing  = true;
+          };
+
+          # Vimium Key Binds
+          "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+            install_url       = moz "vimium-ff";
+            installation_mode = "force_installed";
+            default_area      = "navbar";
+            updates_disabled  = true;
+            private_browsing  = true;
+          };
+
+          # Hide Shorts for YouTube
+          "{88ebde3a-4581-4c6b-8019-2a05a9e3e938}" = {
+            install_url       = moz "hide-youtube-shorts";
+            installation_mode = "force_installed";
+            default_area      = "navbar";
+            updates_disabled  = true;
+            private_browsing  = true;
+          };
+        };
       };
-    };
 
-    programs.firefox.enable = true;
-    programs.firefox.configPath = ".mozilla/firefox";
-    programs.firefox.profiles.default = {
-      id = 0;
-      name = "default";
-      isDefault = true;
-      extensions = {
-        force = true;
-        packages = with inputs.firefox-addons.packages."x86_64-linux"; lib.optionals hasFirefoxAddons [
-          bitwarden
-          vimium
-          istilldontcareaboutcookies
-          ublock-origin
-          darkreader
-          # vimium config location:
-          # .mozilla/firefox/default/browser-extension-data/\{d7742d87-e61d-4b78-b8a1-b469842139fa\}/storage.js
-          # youtube-shorts-block
-          # user-agent-string-switcher
-          # fakespot-fake-reviews-amazon
-        ];
-      };
-      settings = {
-        "signon.rememberSignons" = false;
-        "dom.security.https_only_mode" = true;
-        "identity.fxaccounts.enabled" = false;
-        "privacy.trackingprotection.enabled" = true;
-        "browser.disableResetPrompt" = true;
-        "browser.startup.homepage" = "about:home";
-        "browser.download.panel.shown" = true;
-        "browser.shell.checkDefaultBrowser" = false;
-        "browser.shell.defaultBrowserCheckCount" = 1;
-        "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-        "ui.key.menuAccessKeyFocuses" = false;
-        "ui.key.menuAccessKey" = -1;
-        "browser.uiCustomization.state" = ''
-          {"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":[],"nav-bar":["back-button","forward-button","stop-reload-button","urlbar-container","downloads-button","unified-extensions-button","fxa-toolbar-menu-button","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","idcac-pub_guus_ninja-browser-action","ublock0_raymondhill_net-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","addon_darkreader_org-browser-action","_44df5123-f715-9146-bfaa-c6e8d4461d44_-browser-action","_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","new-tab-button","alltabs-button"],"vertical-tabs":[],"PersonalToolbar":["personal-bookmarks"]},"seen":["save-to-pocket-button","idcac-pub_guus_ninja-browser-action","ublock0_raymondhill_net-browser-action","_34daeb50-c2d2-4f14-886a-7160b24d66a4_-browser-action","_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action","_d7742d87-e61d-4b78-b8a1-b469842139fa_-browser-action","developer-button","_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action","addon_darkreader_org-browser-action","_44df5123-f715-9146-bfaa-c6e8d4461d44_-browser-action"],"dirtyAreaCache":["unified-extensions-area","nav-bar","TabsToolbar","toolbar-menubar","vertical-tabs","PersonalToolbar"],"currentVersion":20,"newElementCount":4}
-        '';
-      };
-      search = {
-        force = true;
-        default = "ddg";
+      profiles.default.extensions.force = true; # Somehow required
+      profiles.default.search = {
+        force           = true;
+        default         = "ddg";
+        privateDefault  = "ddg";
+
         engines = {
           "Nix Packages" = {
             urls = [{
@@ -124,6 +160,7 @@ in
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@np"];
           };
+
           "Nix Options" = {
             urls = [{
               template = "https://search.nixos.org/options";
@@ -136,10 +173,12 @@ in
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@no"];
           };
+
           "Home Manager Options" = {
             urls = [{ template = "https://home-manager-options.extranix.com/?query={searchTerms}"; }];
             definedAliases = [ "@ho" ];
           };
+
           "NixOS Wiki" = {
             urls = [{
               template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
@@ -148,10 +187,12 @@ in
             updateInterval = 24 * 60 * 60 * 1000; # every day
             definedAliases = [ "@nw" ];
           };
+
           "My NixOS" = {
             urls = [{ template = "https://mynixos.com/search?q={searchTerms}"; }];
             definedAliases = [ "@mn" ];
           };
+
           "Arch Wiki" = {
             urls = [{
               template = "https://wiki.archlinux.org/index.php";
@@ -161,6 +202,7 @@ in
             }];
             definedAliases = ["@aw"];
           };
+
           "youtube" = {
             urls = [{
               template = "https://www.youtube.com/results";
@@ -170,22 +212,27 @@ in
             }];
             definedAliases = ["@yt"];
           };
+
           "LEO" = {
             urls = [{ template = "https://dict.leo.org/german-english/{searchTerms}"; }];
             definedAliases = ["@leo"];
           };
+
           "Dict.cc" = {
             urls = [{ template = "https://www.dict.cc/?s={searchTerms}"; }];
             definedAliases = ["@dict"];
           };
+
           "docs.rs" = {
             urls = [{ template = "https://docs.rs/releases/search?query={searchTerms}"; }];
             definedAliases = ["@drs"];
           };
+
           "Scryfall" = {
             urls = [{ template = "https://scryfall.com/search?q={searchTerms}"; }];
             definedAliases = ["@scry"];
           };
+
           "google".metaData.alias = "@g";
           "bing".metaData.hidden = true;
         };

@@ -102,6 +102,7 @@ in
       # flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-gnome
       flakeConfig.flake.modules.homeManager.feature-browser
+      flakeConfig.flake.modules.homeManager.feature-vimium
       flakeConfig.flake.modules.homeManager.feature-terminal
       flakeConfig.flake.modules.homeManager.feature-defaultapps
       flakeConfig.flake.modules.homeManager.feature-keychords
