@@ -126,6 +126,9 @@ in
       spotify
       signal-desktop
       telegram-desktop
+      gnome-text-editor
+      decibels
+      showtime
     ];
 
     xdg.portal = {
