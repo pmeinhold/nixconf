@@ -96,9 +96,9 @@ in
 
   flake.modules.homeManager.feature-desktop = { config, lib, pkgs, ... }: {
     imports = [
-      # ./_hyprland.nix
-      # ./_waybar.nix
-      # ./_hyprlock.nix
+      # flakeConfig.flake.modules.homeManager.feature-hyprland
+      # flakeConfig.flake.modules.homeManager.feature-waybar
+      # flakeConfig.flake.modules.homeManager.feature-hyprlock
       # flakeConfig.flake.modules.homeManager.feature-launcher
       flakeConfig.flake.modules.homeManager.feature-gnome
       flakeConfig.flake.modules.homeManager.feature-browser

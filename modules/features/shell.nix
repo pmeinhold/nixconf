@@ -3,10 +3,10 @@
   flake.modules.homeManager.feature-shell = { lib, pkgs, ... }:
   {
     imports = [
-      ./_neovim.nix
-      ./_tmux.nix
-      ./_ssh.nix
-      ./_editorconfig.nix
+      config.flake.modules.homeManager.feature-neovim
+      config.flake.modules.homeManager.feature-tmux
+      config.flake.modules.homeManager.feature-ssh
+      config.flake.modules.homeManager.feature-editorconfig
       config.flake.modules.homeManager.feature-opencode
     ];
 
