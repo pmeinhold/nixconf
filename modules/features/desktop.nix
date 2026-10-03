@@ -12,6 +12,15 @@ in
       # config.flake.modules.nixos.feature-zen-browser
     ];
 
+    xdg.portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
+      ];
+      config.common.default = "*";
+    };
+
     services = {
       displayManager.gdm.enable = lib.mkDefault true;
 
@@ -118,8 +127,9 @@ in
     qt.enable = true;
 
     services = {
-      dunst.enable = true;
+      # dunst.enable = false;
       udiskie.enable = true;
+      gnome.gnome-keyring.enable = true;
     };
 
     home.packages = with pkgs; [
@@ -133,7 +143,10 @@ in
 
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
+      ];
       config.common.default = "*";
     };
   };
