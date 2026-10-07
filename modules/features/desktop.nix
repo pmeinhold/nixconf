@@ -24,6 +24,8 @@ in
     services = {
       displayManager.gdm.enable = lib.mkDefault true;
 
+      gnome.gnome-keyring.enable = true;
+
       blueman.enable = true;
       udisks2.enable = true;
       printing = {
@@ -129,7 +131,6 @@ in
     services = {
       # dunst.enable = false;
       udiskie.enable = true;
-      gnome.gnome-keyring.enable = true;
     };
 
     home.packages = with pkgs; [

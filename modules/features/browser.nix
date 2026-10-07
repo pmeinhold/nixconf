@@ -79,14 +79,10 @@ let
           IconURL     = "https://search.nixos.org/favicon.png";
         }
         { Name = "Home Manager Options"; Alias = "@ho";
-          URLTemplate = "https://home-manager-options.extranix.com/?query={searchTerms}";
+          URLTemplate = "https://search.nixos.org/options?channel=unstable&query={searchTerms}&source=home_manager&type=options";
         }
         { Name = "NixOS Wiki"; Alias = "@nw";
           URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
-        }
-        { Name = "My NixOS"; Alias = "@mn";
-          URLTemplate = "https://mynixos.com/search?q={searchTerms}";
-          IconURL     = "https://mynixos.com/favicon.ico";
         }
         { Name = "Arch Wiki"; Alias = "@aw";
           URLTemplate = "https://wiki.archlinux.org/index.php?search={searchTerms}";
