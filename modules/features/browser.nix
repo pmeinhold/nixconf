@@ -30,6 +30,7 @@ let
     Preferences = {
       ui.key.menuAccessKey = -1; # disable Alt as the menu access key
       browser.translations.automaticallyPopup = false;
+      browser.translations.neverTranslateLanguages = [ "de" "en" ];
     };
 
     # UI and Behavior
