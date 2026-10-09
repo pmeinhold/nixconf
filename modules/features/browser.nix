@@ -62,6 +62,7 @@ let
       Enabled = false;
       Locked = true;
     };
+    Handlers.mimeTypes."application/pdf".action = "saveToDisk";
 
     # Set here rather than in profiles.<name>.search so that it applies to
     # every profile, including freshly created ones.
@@ -187,17 +188,11 @@ in
       policies = my_policies;
     };
 
-    home.packages = with pkgs; [
-      # Brave Browser
-      # brave
-
-      # Zen Browser
-      (pkgs.wrapFirefox
+    # Zen Browser
+    home.packages = with pkgs; [(
+      pkgs.wrapFirefox
         inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
-        {
-          extraPolicies = my_policies;
-        }
-      )
-    ];
+        { extraPolicies = my_policies; }
+    )];
   };
 }
