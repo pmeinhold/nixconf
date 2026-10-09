@@ -26,8 +26,13 @@ let
     BlockAboutProfiles            = true;
     BlockAboutSupport             = true;
 
+    # Preferences
+    Preferences = {
+      ui.key.menuAccessKey = -1; # disable Alt as the menu access key
+      browser.translations.automaticallyPopup = false;
+    };
+
     # UI and Behavior
-    Preferences."ui.key.menuAccessKey" = -1; # disable Alt as the menu access key
     DisplayMenuBar                = "never";
     DontCheckDefaultBrowser       = true;
     HardwareAcceleration          = true;
