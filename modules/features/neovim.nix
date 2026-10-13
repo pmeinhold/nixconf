@@ -40,6 +40,7 @@
         scrolloff = 8;        # minimum nr. of lines above and below cursor
         ignorecase = true;
         showmatch = true;     # briefly jump to matching bracket if insert one
+        foldlevel = 99;
       };
 
       plugins = {
