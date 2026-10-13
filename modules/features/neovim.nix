@@ -2,6 +2,15 @@
 {
   flake.modules.homeManager.feature-neovim = { lib, pkgs, ... }:
   {
+    imports = [
+      inputs.nixvim.homeModules.nixvim
+    ];
+
+    programs.nixvim = {
+      # enable = true;
+      colorschemes.catppuccin.enable = true;
+    };
+
     home.packages = with pkgs; [
       ripgrep
     ];

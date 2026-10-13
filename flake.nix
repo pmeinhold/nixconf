@@ -15,6 +15,8 @@
 
     agenix.url = "github:ryantm/agenix";
 
+    nixvim.url = "github:nix-community/nixvim";
+
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     catppuccin-unstable.url = "github:catppuccin/nix";
 
