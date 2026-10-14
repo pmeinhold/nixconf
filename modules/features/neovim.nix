@@ -24,9 +24,45 @@
       };
 
       globals = {
-        mapleader = " ";      # Space
-        maplocalleader = ","; # Comma
+        mapleader = " ";        # Space
+        maplocalleader = ",";   # Comma
+        loaded_netrwPlugin = 1; # For yazi https://github.com/mikavilpas/yazi.nvim/issues/802
       };
+
+      keymaps = [
+        {
+          action = "<cmd>Yazi<cr>";
+          key = "<leader>y";
+          mode = [ "n" "v" ];
+          options.desc = "Open yazi at the current file";
+        }
+        {
+          action.__raw = /*lua*/ ''function() require("flash").jump() end'';
+          key = "s";
+          mode = [ "n" "x" "o" ];
+          options.desc = "Flash";
+        }
+        {
+          action = "<C-w><C-h>";
+          key = "<C-h>";
+          options.desc = "Go to the left window";
+        }
+        {
+          action = "<C-w><C-j>";
+          key = "<C-j>";
+          options.desc = "Go to the down window";
+        }
+        {
+          action = "<C-w><C-k>";
+          key = "<C-k>";
+          options.desc = "Go to the up window";
+        }
+        {
+          action = "<C-w><C-l>";
+          key = "<C-l>";
+          options.desc = "Go to the right window";
+        }
+      ];
 
       opts = {
         number = true;
@@ -49,6 +85,7 @@
         nvim-autopairs.enable = true;
         lualine.enable = true;
         noice.enable = true;
+        flash.enable = true;
         which-key = {
           enable = true;
           settings.delay = 0;
@@ -57,14 +94,22 @@
           enable = true;
           settings.render = "compact";
         };
+        yazi = {
+          enable = true;
+          settings = {
+            enable_mouse_support = true;
+            open_for_directories = true;
+          };
+        };
         telescope = {
           enable = true;
           keymaps = {
             "<leader>ff" = "find_files";
             "<leader>fg" = "live_grep";
             "<leader>fb" = "buffers";
-            # "<leader>fh" = "help_tags";
-            # "<leader>fo" = "vim_options";
+            "<leader>fm" = "marks";
+            "<leader>fh" = "help_tags";
+            "<leader>fs" = "lsp_document_symbols";
           };
         };
         treesitter = {
