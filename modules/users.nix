@@ -7,6 +7,7 @@
       config.flake.modules.homeManager.feature-shell
       config.flake.modules.homeManager.feature-desktop
       config.flake.modules.homeManager.feature-kmonad-miryoku
+      config.flake.modules.homeManager.feature-papis
 
       ({ ... }: {
         # wayland.windowManager.hyprland.settings.monitor = [

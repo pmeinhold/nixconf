@@ -3,7 +3,7 @@
   flake.modules.homeManager.feature-neovim = { config, lib, pkgs, ... }:
   {
     imports = [
-      inputs.nixvim.homeModules.nixvim
+      inputs.nixvim-unstable.homeModules.nixvim
     ];
 
     home.packages = with pkgs; [
@@ -24,7 +24,7 @@
       };
 
       globals = {
-        mapleader = " "; # Space
+        mapleader = " ";      # Space
         maplocalleader = ","; # Comma
       };
 
