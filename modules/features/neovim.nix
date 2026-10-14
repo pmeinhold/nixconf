@@ -45,12 +45,18 @@
 
       plugins = {
         comment.enable = true;
-        which-key.enable = true;
         nvim-surround.enable = true;
         nvim-autopairs.enable = true;
-        notify.enable = true;
         lualine.enable = true;
         noice.enable = true;
+        which-key = {
+          enable = true;
+          settings.delay = 0;
+        };
+        notify = {
+          enable = true;
+          settings.render = "compact";
+        };
         telescope = {
           enable = true;
           keymaps = {
@@ -71,6 +77,7 @@
             json
             lua
             make
+            latex
             typst
             markdown
             markdown_inline
