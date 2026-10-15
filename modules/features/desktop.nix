@@ -25,7 +25,6 @@ in
 
       gnome.gnome-keyring.enable = true;
 
-      blueman.enable = true;
       udisks2.enable = true;
       printing = {
         enable = true;
@@ -129,7 +128,10 @@ in
 
     services = {
       # dunst.enable = false;
-      udiskie.enable = true;
+      udiskie = {
+        enable = true;
+        settings.program_options.tray = false;
+      };
     };
 
     home.packages = with pkgs; [
