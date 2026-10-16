@@ -27,10 +27,13 @@ let
     BlockAboutSupport             = true;
 
     # Preferences
+    # Keys MUST be quoted strings. A Nix attrset would generate this wrong policies.json:
+    # "Preferences": { "browser": { "translations": { ... } } }
     Preferences = {
-      ui.key.menuAccessKey = -1; # disable Alt as the menu access key
-      browser.translations.automaticallyPopup = false;
-      browser.translations.neverTranslateLanguages = [ "de" "en" ];
+      "ui.key.menuAccessKey" = -1; # disable Alt as the menu access key
+      "browser.translations.automaticallyPopup" = false;
+      "browser.translations.neverTranslateLanguages" = "de,en";
+      "browser.toolbarbuttons.introduced.sidebar-button" = false;
     };
 
     # UI and Behavior

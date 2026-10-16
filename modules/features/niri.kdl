@@ -183,6 +183,7 @@ binds {
     Mod+Shift+K { move-window-up-or-to-workspace-up; } //{ move-column-to-workspace-up; }
     Mod+Shift+J { move-window-down-or-to-workspace-down; } //{ move-column-to-workspace-down; }
     Mod+O repeat=false { toggle-overview; }
+    Mod+Z { center-column; }
     // Mod+Shift+J { move-window-down; }
     // Mod+Shift+K { move-window-up; }
     // Mod+Shift+H { move-column-to-workspace-up; }
