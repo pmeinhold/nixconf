@@ -33,7 +33,7 @@ let
       "ui.key.menuAccessKey" = -1; # disable Alt as the menu access key
       "browser.translations.automaticallyPopup" = false;
       "browser.translations.neverTranslateLanguages" = "de,en";
-      "browser.toolbarbuttons.introduced.sidebar-button" = false;
+      "sidebar.verticalTabs" = true;
     };
 
     # UI and Behavior
