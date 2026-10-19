@@ -34,6 +34,8 @@ let
       "browser.translations.automaticallyPopup" = false;
       "browser.translations.neverTranslateLanguages" = "de,en";
       "sidebar.verticalTabs" = true;
+      "browser.newtabpage.activity-stream.default.sites" = "";
+      # "browser.uiCustomization.[...]" = "";
     };
 
     # UI and Behavior
