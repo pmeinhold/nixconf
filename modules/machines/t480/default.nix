@@ -56,6 +56,8 @@
             HandleLidSwitchExternalPower = "lock";
             HandleLidSwitchDocked = "lock";
           };
+
+          # https://bbs.archlinux.org/viewtopic.php?id=285210
           tlp = {
             enable = true;
             settings = {
