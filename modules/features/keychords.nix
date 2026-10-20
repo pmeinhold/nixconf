@@ -12,29 +12,44 @@
     home = config.home.homeDirectory;
   in
   {
+    # programs.wlr-which-key = {
+    #   enable = true;
+    #   settings = {
+    #     font = "Inconsolata Nerd Font 14";
+    #     background = "#1e1e2ed0";
+    #     color = "#cdd6f4";
+    #     border = "#cba6f7";
+    #     separator = " → ";
+    #     border_width = 2;
+    #     corner_r = 8;
+    #     padding = 15;
+    #     anchor = "center";
+    #     inhibit_compositor_keyboard_shortcuts = true;
+    #
+    #     menu = [
+    #       { key = "Return"; desc = "  Terminal";     cmd = "${term}"; }
+    #       { key = "b";      desc = "󰈹  Browser";      cmd = "zen"; }
+    #       { key = "r";      desc = "󱓞  Run ...";      cmd = "noctalia msg panel-toggle launcher"; }
+    #       { key = "p";      desc = "󰹑  Screenshot";   cmd = "noctalia msg screenshot-region"; }
+    #       { key = "l";      desc = "󰍁  Lock";         cmd = "noctalia msg session lock"; }
+    #       {
+    #         key     = "s";
+    #         desc    = "System";
+    #         submenu = [
+    #           { key = "s";      desc = "󰐥  Shutdown"; cmd = "systemctl poweroff"; }
+    #           { key = "r";      desc = "󰜉  Reboot";   cmd = "systemctl reboot"; }
+    #           { key = "l";      desc = "󰿅  Logout";   cmd = "noctalia msg session logout"; }
+    #         ];
+    #       }
+    #     ];
+    #   };
+    # };
+
     home.packages = [ pkgs.wlr-which-key ];
-
-    #home.file."keychords-screenshot" = {
-    #  executable = true;
-    #  target = ".config/keychords/screenshot.sh";
-    #  text = ''
-    #    #!/bin/sh
-    #    grim -g "$(slurp)" "$HOME/Desktop/$(date +'%F_%T.png')"
-    #  '';
-    #};
-
-    #home.file."keychords-logout" = {
-    #  executable = true;
-    #  target = ".config/keychords/logout.sh";
-    #  text = ''
-    #    #!/bin/sh
-    #    loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
-    #  '';
-    #};
-
-
     # noctalia msg session <lock|suspend|lock-and-suspend|logout|reboot|shutdown>
-    xdg.configFile."wlr-which-key/config.yaml".text = ''
+    # 󰈹
+    # 
+    xdg.configFile."wlr-which-key/config.yaml".text = /*yaml*/ ''
       font: "Inconsolata Nerd Font 14"
       background: "#1e1e2ed0"
       color: "#cdd6f4"
@@ -51,13 +66,13 @@
           desc:   Terminal
           cmd: ${term}
         - key: "b"
-          desc: 󰈹  Browser
-          cmd: firefox
+          desc:   Browser
+          cmd: zen
         - key: "r"
-          desc: 󱓞  Launcher
+          desc: 󱓞  Run ...
           cmd: noctalia msg panel-toggle launcher
         - key: "p"
-          desc: 󰹑  Screenshot
+          desc: 󰹑  Print Screen
           cmd: noctalia msg screenshot-region
         - key: "l"
           desc: 󰍁  Lock
@@ -75,10 +90,5 @@
               desc: 󰿅  Logout
               cmd: noctalia msg session logout
     '';
-    # cmd: rofi -show drun
-    # cmd: hyprlock
-    # cmd: ${home}/.config/keychords/screenshot.sh
-        # cmd: ${home}/.config/keychords/logout.sh
-    # 
   };
 }

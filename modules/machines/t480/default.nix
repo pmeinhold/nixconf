@@ -1,6 +1,6 @@
 { lib, config, inputs, ... }:
 {
-  flake.nixosConfigurations.t480 = inputs.nixpkgs-unstable.lib.nixosSystem {
+  flake.nixosConfigurations.t480 = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       ./_hardware.nix
@@ -57,7 +57,7 @@
             HandleLidSwitchDocked = "lock";
           };
           tlp = {
-            enable = false;
+            enable = true;
             settings = {
               #Optional helps save long term battery health
               STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging

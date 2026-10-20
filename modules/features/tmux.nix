@@ -37,6 +37,7 @@
       prefix = "M-Enter";
       plugins = with pkgs.tmuxPlugins; [
         sensible
+        tmux-which-key
         # {
         #   plugin = tmux-sessionx;
         #   extraConfig = "set -g @sessionx-bind 'f'";
