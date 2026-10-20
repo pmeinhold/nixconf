@@ -58,22 +58,6 @@
           };
 
           # https://bbs.archlinux.org/viewtopic.php?id=285210
-          tlp = {
-            enable = true;
-            settings = {
-              #Optional helps save long term battery health
-              STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-              STOP_CHARGE_THRESH_BAT1 = 80;
-              # START_CHARGE_THRESH_BAT0 = 80; # this and bellow it starts to charge
-              # START_CHARGE_THRESH_BAT1 = 80;
-
-              CPU_SCALING_GOVERNOR_ON_AC = "performance";
-              CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-              CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-              CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-            };
-          };
         };
 
         system.stateVersion = "25.11";

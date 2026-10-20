@@ -200,9 +200,17 @@ in
     };
 
     # Zen Browser
+    # Upstream re-uploaded the 1.23.3b release tarball in place, so the hash
+    # pinned in the zen-browser flake is stale and the fetch fails. Override the
+    # src until the flake bumps past 1.23.3b, then drop this.
     home.packages = with pkgs; [(
       pkgs.wrapFirefox
-        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
+        (inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped.overrideAttrs (_: {
+          src = pkgs.fetchurl {
+            url = "https://github.com/zen-browser/desktop/releases/download/1.23.3b/zen.linux-x86_64.tar.xz";
+            hash = "sha256-uyBF0+IWVNQP6EElAJLurf0sH8gx7vtQkiJ3PIvcoUk=";
+          };
+        }))
         { extraPolicies = my_policies; }
     )];
   };

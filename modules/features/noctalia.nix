@@ -4,6 +4,7 @@
   {
     networking.networkmanager.enable = true;
     hardware.bluetooth.enable = true;
+    # https://bbs.archlinux.org/viewtopic.php?id=285210
     services.tuned.enable = true;
     services.upower.enable = true;
 
