@@ -205,6 +205,7 @@ in
     # src until the flake bumps past 1.23.3b, then drop this.
     home.packages = with pkgs; [(
       pkgs.wrapFirefox
+        # inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
         (inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped.overrideAttrs (_: {
           src = pkgs.fetchurl {
             url = "https://github.com/zen-browser/desktop/releases/download/1.23.3b/zen.linux-x86_64.tar.xz";
