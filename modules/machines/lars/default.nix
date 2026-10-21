@@ -6,6 +6,7 @@
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
+      config.flake.modules.nixos.feature-gaming
       config.flake.modules.nixos.feature-podman
       config.flake.modules.nixos.feature-syncthing
       # config.flake.modules.nixos.feature-libvirt
@@ -24,12 +25,6 @@
         };
 
         users.users.paulm.extraGroups = [ "libvirtd" ];
-
-        programs.steam = {
-          enable = true;
-          remotePlay.openFirewall = false;
-          dedicatedServer.openFirewall = false;
-        };
 
         system.stateVersion = "25.11";
       })

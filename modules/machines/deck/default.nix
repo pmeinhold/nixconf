@@ -9,7 +9,6 @@ in
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-gnome
-      config.flake.modules.nixos.feature-emulation
 
       ({ pkgs, ... }: {
         networking.hostName = "deck";

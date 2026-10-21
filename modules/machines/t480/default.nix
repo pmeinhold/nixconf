@@ -6,6 +6,7 @@
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
       config.flake.modules.nixos.feature-desktop
+      config.flake.modules.nixos.feature-gaming
       config.flake.modules.nixos.feature-kmonad
       config.flake.modules.nixos.feature-syncthing
       config.flake.modules.nixos.feature-vpn

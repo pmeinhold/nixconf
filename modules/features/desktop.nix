@@ -65,14 +65,6 @@ in
       };
     };
 
-    programs = {
-      # dconf.enable = true; # For Gnome and GTK managing user preferences
-      hyprland = {
-        enable = false;
-        xwayland.enable = true;
-      };
-    };
-
     environment = {
       systemPackages = with pkgs; [
         foot
