@@ -170,7 +170,7 @@ in
           environmentFile = config.age.secrets.duckdns_token.path;
           package = pkgs.caddy.withPlugins {
             plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
-            hash = "sha256-ievwHFPgn5Nb/AHpms9glR3iRB+RYCkEnB/HalUwbaY=";
+            hash = "sha256-hdJoUoWpDZEz367Rwhagz5040TMHBReLY+hhHjMfwgM=";
           };
           # virtualHosts."${...}".extraConfig = ''
           #   tls {

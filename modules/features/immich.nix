@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.feature-immich = { pkgs, config, ... }:
   {
@@ -9,6 +9,9 @@
       openFirewall = true;
       accelerationDevices = null;
       mediaLocation = "/mnt/storage/Immich";
+
+      # Due to immich v2.7.5 (in nixpkgs 26.05) being insecure.
+      package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.immich;
     };
     users.users.immich.extraGroups = [ "video" "render" ];
 
