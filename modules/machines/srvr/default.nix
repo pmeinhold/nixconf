@@ -13,43 +13,70 @@ in
     modules = [
       ./_hardware.nix
       config.flake.modules.nixos.feature-base
-      config.flake.modules.nixos.feature-server
       config.flake.modules.nixos.feature-syncthing
+      config.flake.modules.nixos.feature-hdidle
+      config.flake.modules.nixos.feature-mergerfs
+      config.flake.modules.nixos.feature-snapraid
+      config.flake.modules.nixos.feature-immich
 
       ({ config, lib, pkgs, ... }: {
         networking.hostName = "srvr";
 
         boot.loader.systemd-boot.enable = true;
+        # EHL/JSL: HuC loading is disabled by default since kernel 5.8, required for the
+        # low-power hw encoder this chip needs. https://github.com/intel/media-driver#enablingdisabling-features
+        hardware.enableRedistributableFirmware = true;
+        boot.kernelParams = [ "i915.enable_guc=2" ];
 
-        environment = {
-          systemPackages = with pkgs; [ ];
-          sessionVariables = { LIBVA_DIVER_NAME = "iHD"; };
+        services.jellyfin = {
+          enable = true;
+          openFirewall = true;
+          user = username;
+          hardwareAcceleration = {
+            enable = true;
+            device = "/dev/dri/by-path/pci-0000:00:02.0-render";
+            # Use vaapi because Quick Sync (QSV) support is deprecated for Jasper Lake :(
+            # https://jellyfin.org/docs/general/post-install/transcoding/hardware-acceleration/intel
+            type = "vaapi";
+          };
+          # Supported codecs: https://github.com/intel/media-driver#decodingencoding-features
+          # AV1 is not in either list - Jasper Lake (Gen11) has no AV1 decode/encode hardware at all.
+          forceEncodingConfig = true; # Overwrite any WebUI changes to the transcoding settings
+          transcoding = {
+            enableHardwareEncoding = true;
+            # Gen11 JSL/EHL graphics only support the low-power encoder, unlike e.g. Ice Lake which supports both.
+            enableIntelLowPowerEncoding = true;
+            hardwareDecodingCodecs = {
+              h264 = true;
+              hevc = true;
+              hevc10bit = true;
+            };
+            hardwareEncodingCodecs = {
+              # h264 encoding is always enabled by Jellyfin; not a valid option here.
+              hevc = true;
+            };
+          };
         };
+        environment.systemPackages = [ pkgs.jellyfin-ffmpeg ]; # jellyfin fork of ffmpeg
+        environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+        systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+        users.users.${username}.extraGroups = [ "video" "render" ]; # for jellyfin VAAPI access to /dev/dri
 
-        systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD"; # or i965
-        services.jellyfin.user = username;
         hardware.graphics = {
           enable = true;
           extraPackages = with pkgs; [
-            intel-ocl
-            intel-media-driver
-            # intel-compute-runtime # for newer processors (>=13th gen)
-            intel-compute-runtime-legacy1
-            vpl-gpu-rt # for newer processors (>=11th gen)
-            # https://github.com/intel/libvpl?tab=readme-ov-file#dispatcher-behavior-when-targeting-intel-gpus
+            intel-media-driver            # For Broadwell and newer (ca. 2014+), use with LIBVA_DRIVER_NAME=iHD
+            intel-compute-runtime-legacy1 # OpenCL driver for processors older than 13th gen but somewhat new
+            # We have the Intel Celeron N5105 with QuickSync belonging to the Jasper Lake architecture (which is post-Broadwell by being launched in 2021)
+            # "It includes the Intel Gen11 graphics architecture from Ice Lake" - Wikipedia
+            #
             # https://www.intel.com/content/www/us/en/products/sku/212328/intel-celeron-processor-n5105-4m-cache-up-to-2-90-ghz/specifications.html
-            # intel-media-sdk # Enable QuickSyncVideo (QSV)
-
-            # TODO: Need to update soon. Read: https://wiki.nixos.org/wiki/Jellyfin
-            # intel-vaapi-driver
-            # intel-vdpau-driver
+            # https://en.wikipedia.org/wiki/Tremont_(microarchitecture)
+            # https://wiki.nixos.org/wiki/Jellyfin
+            # https://wiki.nixos.org/wiki/Intel_Graphics
+            # For info, try "nix-shell -p intel-gpu-tools --run intel_gpu_top"
           ];
         };
-        # Only set this if you're using intel-vaapi-driver
-        # nixpkgs.config.packageOverrides = pkgs: {
-        #   intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-        # };
-        # Do 'nix-shell -p intel-gpu-tools --run intel_gpu_top' for info
 
         users.users = {
           read = {
