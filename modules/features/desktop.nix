@@ -69,14 +69,18 @@ in
       systemPackages = with pkgs; [
         foot
         nautilus
+        decibels
+        showtime
+        gnome-text-editor
         pwvucontrol
         playerctl
         brightnessctl
+        (element-desktop.override { commandLineArgs = "--password-store=gnome-libsecret"; })
         system-config-printer
-        # screenshot requirements
-        grim
-        slurp
         wl-clipboard
+        # screenshot requirements
+        # grim
+        # slurp
         # dunst
         # libnotify
         # awww
@@ -90,7 +94,7 @@ in
         # If your cursor becomes invisible
         #WLR_NO_HARDWARE_CURSORS = "1";
         # Hint electron apps to use wayland
-        # NIXOS_OZONE_WL = "1";
+        NIXOS_OZONE_WL = "1";
       };
     };
   };
@@ -130,9 +134,6 @@ in
       spotify
       signal-desktop
       telegram-desktop
-      gnome-text-editor
-      decibels
-      showtime
     ];
 
     xdg.portal = {
