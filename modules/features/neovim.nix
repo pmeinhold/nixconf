@@ -62,6 +62,18 @@
           key = "<C-l>";
           options.desc = "Go to the right window";
         }
+        # {
+        #   action = "gj";
+        #   key = "j";
+        #   mode = [ "n" "v" ];
+        #   options.desc = "Go down one line or wrapped sub-line";
+        # }
+        # {
+        #   action = "gk";
+        #   key = "k";
+        #   mode = [ "n" "v" ];
+        #   options.desc = "Go up one line or wrapped sub-line";
+        # }
       ];
 
       opts = {
@@ -72,7 +84,9 @@
         splitbelow = true;
         splitright = true;
         termguicolors = true;
-        colorcolumn = "100";  # Rust style guide: max line width is 100
+        # formatoptions = "cqj";   # dropped 't': no auto-wrap of plain text
+        colorcolumn = "+0";   # relative to 'textwidth'
+        textwidth = 100;      # fallback value from the Rust style guide; normally set by .editorconfig
         scrolloff = 8;        # minimum nr. of lines above and below cursor
         ignorecase = true;
         showmatch = true;     # briefly jump to matching bracket if insert one
