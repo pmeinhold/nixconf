@@ -85,8 +85,7 @@
         splitright = true;
         termguicolors = true;
         # formatoptions = "cqj";   # dropped 't': no auto-wrap of plain text
-        colorcolumn = "+1";   # relative to 'textwidth' which is normally set by .editorconfig
-        textwidth = 100;      # fallback value from the Rust style guide
+        colorcolumn = "+1";   # relative to 'textwidth' which is normally set by .editorconfig.max_line_length
         scrolloff = 8;        # minimum nr. of lines above and below cursor
         ignorecase = true;
         showmatch = true;     # briefly jump to matching bracket if insert one
