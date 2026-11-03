@@ -165,10 +165,7 @@ in
           };
         };
 
-        age.secrets.duckdns_token = {
-          file = ../../../secrets/duckdns_token.age;
-          owner = "caddy";
-        };
+        age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
         age.secrets.desec_token = {
           file = ../../../secrets/desec_token.age;
           owner = "caddy";
@@ -177,21 +174,13 @@ in
           enable = true;
           openFirewall = true;
           environmentFile = config.age.secrets.desec_token.path;
-          # environmentFile = config.age.secrets.duckdns_token.path;
           package = pkgs.caddy.withPlugins {
-            # plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
             plugins = [ "github.com/caddy-dns/desec@v1.1.0" ];
             hash = "sha256-CpfQSS+dWFNhnTfo9TEDyRnsMtZScvyL+5/4gd82pI0";
           };
-          # virtualHosts."${...}".extraConfig = ''
-          #   tls {
-          #     dns duckdns {env.DUCKDNS_TOKEN}
-          #   }
-          #   reverse_proxy ${tailnetip}:2283
-          # '';
           virtualHosts."*.${mydomain}".extraConfig = ''
             tls {
-              dns desec {env.DESEC_TOKEN}
+              dns desec {$DESEC_TOKEN}
             }
             @immich host immich.${mydomain}
             handle @immich {

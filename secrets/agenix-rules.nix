@@ -6,7 +6,7 @@ let
   users = [ paulm_vps0 default ];
 
   # System pub keys
-  srvr = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE6MUaxloE+8Vxj9bZ5MvFJXtuDlqST5HqwD5q+7VfMc root@nixos";
+  srvr = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIARggIM7jHxTwMfofiI/fVuf3dk29nMrpu+sEfUnl7ZO root@srvr";
   vps0 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6yGBaKtk/t7X3B8a6krU2/1xnzzA8eWjFrbWaceEHx root@vps0";
   systems = [ vps0 srvr ];
 in
