@@ -13,13 +13,15 @@ in
 {
   # "secret1.age".publicKeys = [ user1 ];
   "duckdns_token.age".publicKeys = [ srvr ];
+  "desec_token.age".publicKeys = [ srvr ];
   "syncthing_gui_pw.age".publicKeys = [ default ];
   "obsidian_remote_password.age".publicKeys = [ vps0 ];
 }
 
 # Usage:
-#   cd secrets/
-#   agenix -e <secret>.age
+#   1. Add an entry with a key above: "<name>.age".publicKeys = [ <key> ];
+#   2. cd secrets/
+#   3. agenix -e <name>.age
 #
 # Then reference it like this:
 #   age.secrets.nextcloud = {

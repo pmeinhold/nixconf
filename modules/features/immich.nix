@@ -10,6 +10,28 @@
       accelerationDevices = null;
       mediaLocation = "/mnt/storage/Immich";
 
+      settings = {
+        nightlyTasks.startTime = "12:00";
+        library.scan = {
+          cronExpression = "0 12 * * *";
+          enabled = true;
+        };
+        integrityChecks = {
+          checksumFiles = {
+            cronExpression = "0 14 * * *";
+            enabled = true;
+          };
+          missingFiles = {
+            cronExpression = "0 14 * * *";
+            enabled = true;
+          };
+          untrackedFiles = {
+            cronExpression = "0 14 * * *";
+            enabled = true;
+          };
+        };
+      };
+
       # Due to immich v2.7.5 (in nixpkgs 26.05) being insecure.
       package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.immich;
     };
