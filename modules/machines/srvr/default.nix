@@ -180,7 +180,9 @@ in
           };
           virtualHosts."*.${mydomain}".extraConfig = ''
             tls {
-              dns desec {$DESEC_TOKEN}
+              dns desec {
+                token env.DESEC_TOKEN
+              }
             }
             @immich host immich.${mydomain}
             handle @immich {
