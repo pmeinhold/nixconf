@@ -170,32 +170,46 @@ in
           file = ../../../secrets/desec_token.age;
           owner = "caddy";
         };
+        security.acme = {
+          acceptTerms = true;
+          defaults.email = "paulmatti+acme@protonmail.com";
+          certs.${mydomain} = {
+            domain = "*.${mydomain}";
+            dnsProvider = "desec";
+            environmentFile = config.age.secrets.desec_token.path;
+            group = "caddy";
+            reloadServices = [ "caddy.service" ];
+          };
+        };
         services.caddy = {
           enable = true;
           openFirewall = true;
           environmentFile = config.age.secrets.desec_token.path;
-          package = pkgs.caddy.withPlugins {
-            plugins = [ "github.com/caddy-dns/desec@v1.1.0" ];
-            hash = "sha256-CpfQSS+dWFNhnTfo9TEDyRnsMtZScvyL+5/4gd82pI0";
-          };
-          virtualHosts."*.${mydomain}".extraConfig = ''
-            tls {
-              dns desec {
-                token env.DESEC_TOKEN
+          # package = pkgs.caddy.withPlugins {
+          #   plugins = [ "github.com/caddy-dns/desec@v1.1.0" ];
+          #   hash = "sha256-CpfQSS+dWFNhnTfo9TEDyRnsMtZScvyL+5/4gd82pI0";
+          # };
+            # tls {
+            #   dns desec {
+            #     token env.DESEC_TOKEN
+            #   }
+            # }
+          virtualHosts."*.${mydomain}" = {
+            useACMEHost = mydomain;
+            extraConfig = ''
+              @immich host immich.${mydomain}
+              handle @immich {
+                reverse_proxy ${tailnetip}:2283
               }
-            }
-            @immich host immich.${mydomain}
-            handle @immich {
-              reverse_proxy ${tailnetip}:2283
-            }
-            @jf host jf.${mydomain}
-            handle @jf {
-              reverse_proxy ${tailnetip}:8096
-            }
-            handle {
-              abort
-            }
-          '';
+              @jf host jf.${mydomain}
+              handle @jf {
+                reverse_proxy ${tailnetip}:8096
+              }
+              handle {
+                abort
+              }
+            '';
+          };
         };
 
         # services.microbin = {
