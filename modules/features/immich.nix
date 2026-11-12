@@ -11,6 +11,10 @@
       mediaLocation = "/mnt/storage/Immich";
 
       settings = {
+        backup.database = {
+          cronExpression = "0 12 * * *";
+          enabled = true;
+        };
         nightlyTasks.startTime = "12:00";
         library.scan = {
           cronExpression = "0 12 * * *";
