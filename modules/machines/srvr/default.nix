@@ -92,16 +92,11 @@ in
         networking.firewall = {
           enable = true;
           allowedTCPPorts = [
-            28981
-            69
-            5232
-            80
-            443
+            28981 # paperless
+            5232  # radicale
             # 53 # DNS
           ];
-          allowedUDPPorts = [
-            # 53 # DNS
-          ];
+          # allowedUDPPorts = [ 53 # DNS ];
         };
 
         # services = {
@@ -185,15 +180,6 @@ in
           enable = true;
           openFirewall = true;
           environmentFile = config.age.secrets.desec_token.path;
-          # package = pkgs.caddy.withPlugins {
-          #   plugins = [ "github.com/caddy-dns/desec@v1.1.0" ];
-          #   hash = "sha256-CpfQSS+dWFNhnTfo9TEDyRnsMtZScvyL+5/4gd82pI0";
-          # };
-            # tls {
-            #   dns desec {
-            #     token env.DESEC_TOKEN
-            #   }
-            # }
           virtualHosts."*.${mydomain}" = {
             useACMEHost = mydomain;
             extraConfig = ''
@@ -204,6 +190,14 @@ in
               @jf host jf.${mydomain}
               handle @jf {
                 reverse_proxy ${tailnetip}:8096
+              }
+              @pl host pl.${mydomain}
+              handle @pl {
+                reverse_proxy ${tailnetip}:28981
+              }
+              @radicale host radicale.${mydomain}
+              handle @radicale {
+                reverse_proxy ${tailnetip}:5232
               }
               handle {
                 abort
