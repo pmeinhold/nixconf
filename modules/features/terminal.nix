@@ -1,5 +1,20 @@
 { ... }:
 {
+  flake.modules.nixos.feature-terminal = { lib, pkgs, ... }:
+  {
+    programs.foot = {
+      enable = lib.mkDefault true;
+      xdg.serverAutostart = false;
+      settings = {
+        main = {
+          term = "xterm-256color";
+          font = "Inconsolata Nerd Font:size=14";
+          dpi-aware = "no"; # yes
+        };
+      };
+    };
+  };
+
   flake.modules.homeManager.feature-terminal = { lib, pkgs, ... }:
   {
     programs.foot = {

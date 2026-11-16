@@ -24,16 +24,16 @@ in
       settings = {
         gui.user = "${defaultUser}";
         devices = {
-          "zenfone" = { id = "YGHKFE7-CKPD3XY-EJQJWSJ-7VA6N35-2LENZ7H-PE2CEBR-WFFXDQN-KIBVPQ2"; };
+          "zenfone" = { id = "BUOY3RQ-TAEEMB5-XNCQYNI-JDECEHE-GXQU6YN-VXHPGFG-B5F7X2N-UGPHOAX"; };
           "lars" = { id = "EMHP2R4-RO4333P-6YQQGZD-ZRWJTXM-NCA3B5G-WQ3OZD6-LMSDQAW-BKFVJAC"; };
+          "srvr" = { id = "2EJLRFK-CHGXUAD-6GKI7PU-ZHIDG5V-G2I6KWY-RK2IDC7-TM2WWXZ-QST26QP"; };
         };
         folders."Sync" = {
           path = "/home/${defaultUser}/Sync";
           devices = [
             "zenfone"
             "lars"
-            # "t480"
-            # "srvr"
+            "srvr"
           ];
         };
       };

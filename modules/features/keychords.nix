@@ -8,8 +8,6 @@
       else if config.programs.wezterm.enable   then "wezterm"
       else "noctalia msg notification-show 'No terminal configured'";
       # else "notify-send 'No terminal configured'";
-
-    home = config.home.homeDirectory;
   in
   {
     # programs.wlr-which-key = {

@@ -22,6 +22,7 @@
     # menu row and the prefix binding below are the same single definition.
     # enableTmuxIntegration is therefore off -- otherwise the module would add
     # a second, independently-maintained copy of this on the prefix table.
+    # seshPopup = ''display-popup -B -h 100% -w 100% -E "sesh picker -Hds"'';
     seshConnect = pkgs.writeShellScript "sesh-connect" ''
       sesh connect "$(
         sesh list --icons | fzf --tmux 80%,70% \
@@ -71,6 +72,7 @@
       { sep = true; }
       # Sessions and misc
       { key = "s";         desc = "Sessions (sesh)";      cmd = ''run-shell "${seshConnect}"''; prefix = true; }
+      # { key = "s";         desc = "Sessions (sesh)";      cmd = seshPopup; prefix = true; }
       { key = "w";         desc = "Choose window/session"; cmd = "choose-tree -Zs"; }
       { key = "[";         desc = "Copy mode";            cmd = "copy-mode"; }
       { key = "M-q";       desc = "Detach client";        cmd = "detach-client";   root = true; }
@@ -136,6 +138,7 @@
       ''
         set-option -sa terminal-overrides ",xterm*:Tc"
         set-option -g status-position top
+        set -g detach-on-destroy off  # don't exit from tmux when closing a session
 
         # Prefix-free fast paths, generated from `wk` -- the same list that
         # builds the menu. The -N notes are what `list-keys -N` renders.
