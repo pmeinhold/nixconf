@@ -35,6 +35,11 @@
     programs.yazi = {
       enable = true;
       shellWrapperName = "y";
+      package = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux.yazi;
+      # Disable permanent deletion keys
+      keymap.mgr.prepend_keymap = [
+        { on = "D";         run = "noop";         desc = "Disabled permanent deletion"; }
+      ];
     };
     programs.zoxide = {
       enable = true;
